@@ -14,9 +14,27 @@ export default function App() {
   const data = useAppData();
 
   useEffect(() => {
+    let registration: ServiceWorkerRegistration | undefined;
+    const updateWhenVisible = () => {
+      if (document.visibilityState === "visible" && navigator.onLine) {
+        void registration?.update();
+      }
+    };
+
     registerSW({
-      immediate: true
+      immediate: true,
+      onRegisteredSW(_swUrl, swRegistration) {
+        registration = swRegistration;
+        updateWhenVisible();
+        document.addEventListener("visibilitychange", updateWhenVisible);
+        window.addEventListener("online", updateWhenVisible);
+      }
     });
+
+    return () => {
+      document.removeEventListener("visibilitychange", updateWhenVisible);
+      window.removeEventListener("online", updateWhenVisible);
+    };
   }, []);
 
   if (data.loading || !data.profile) {

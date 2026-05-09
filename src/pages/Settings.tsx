@@ -1,6 +1,8 @@
 import { Download, RotateCcw, Upload } from "lucide-react";
 import { type ChangeEvent, type FormEvent, useEffect, useMemo, useState } from "react";
+import { APP_VERSION } from "../app/version";
 import { exportUserData, importUserData } from "../db/indexedDb";
+import { checkForUpdateAndReload } from "../services/appUpdate";
 import type { AppExport, OdometerReading, VehicleProfile } from "../types";
 import { formatDate, formatKm } from "../utils/format";
 
@@ -30,6 +32,7 @@ export function Settings({ profile, odometerReadings, onSaveProfile, onImportCom
   const [unknownHistoryMode, setUnknownHistoryMode] = useState(profile.unknownHistoryMode);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [checkingForUpdate, setCheckingForUpdate] = useState(false);
 
   useEffect(() => {
     setUnknownHistoryMode(profile.unknownHistoryMode);
@@ -90,11 +93,26 @@ export function Settings({ profile, odometerReadings, onSaveProfile, onImportCom
     setMessage("Local data reset.");
   }
 
+  async function handleUpdateReload() {
+    setError(null);
+    setMessage("Checking for an app update...");
+    setCheckingForUpdate(true);
+    try {
+      await checkForUpdateAndReload();
+    } catch (err) {
+      setCheckingForUpdate(false);
+      setError(err instanceof Error ? err.message : "Could not reload the app update.");
+      setMessage(null);
+    }
+  }
+
   return (
     <main className="page">
       <section className="section-block">
         <p className="eyebrow">Local device settings</p>
         <h1>Settings</h1>
+        {message ? <p className="form-success">{message}</p> : null}
+        {error ? <p className="form-error">{error}</p> : null}
       </section>
 
       <section className="section-block detail-card">
@@ -165,13 +183,29 @@ export function Settings({ profile, odometerReadings, onSaveProfile, onImportCom
             reminders when opened.
           </p>
 
-          {message ? <p className="form-success">{message}</p> : null}
-          {error ? <p className="form-error">{error}</p> : null}
-
           <button className="primary-button" type="submit">
             Save settings
           </button>
         </form>
+      </section>
+
+      <section className="section-block detail-card">
+        <h2>App update</h2>
+        <dl className="detail-grid">
+          <div className="detail-row">
+            <dt>App version</dt>
+            <dd>{APP_VERSION}</dd>
+          </div>
+        </dl>
+        <button
+          className="secondary-button full-width-button"
+          type="button"
+          onClick={handleUpdateReload}
+          disabled={checkingForUpdate}
+        >
+          <RotateCcw aria-hidden="true" size={20} />
+          {checkingForUpdate ? "Checking..." : "Check for update / Reload app"}
+        </button>
       </section>
 
       <section className="section-block detail-card">
