@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Pajero Maintenance icon">
+  <rect width="512" height="512" rx="96" fill="#101416"/>
+  <rect x="80" y="180" width="352" height="128" rx="34" fill="#f4b942"/>
+  <path d="M122 180l52-58h164l52 58" fill="#202829"/>
+  <path d="M164 122h184l38 58H112z" fill="#5bc0be"/>
+  <circle cx="166" cy="322" r="42" fill="#202829"/>
+  <circle cx="346" cy="322" r="42" fill="#202829"/>
+  <circle cx="166" cy="322" r="18" fill="#f5f2e8"/>
+  <circle cx="346" cy="322" r="18" fill="#f5f2e8"/>
+  <path d="M214 250h84v32h-84z" fill="#101416"/>
+  <path d="M242 218h28v96h-28z" fill="#101416"/>
+</svg>
