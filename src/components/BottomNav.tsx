@@ -1,4 +1,4 @@
-import { Gauge, ListChecks, Settings, Wrench } from "lucide-react";
+import { Gauge, ListChecks, Settings } from "lucide-react";
 import { navigateTo } from "../hooks/useHashRoute";
 
 interface BottomNavProps {
@@ -7,8 +7,7 @@ interface BottomNavProps {
 
 const items = [
   { path: "/", label: "Dashboard", icon: Gauge, key: "dashboard" },
-  { path: "/maintenance", label: "Service", icon: ListChecks, key: "maintenance" },
-  { path: "/odometer", label: "Odometer", icon: Wrench, key: "odometer" },
+  { path: "/maintenance", label: "Maintenance", icon: ListChecks, key: "maintenance" },
   { path: "/settings", label: "Settings", icon: Settings, key: "settings" }
 ];
 

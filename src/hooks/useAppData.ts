@@ -65,6 +65,16 @@ export function useAppData() {
     [profile]
   );
 
+  const dismissOdometerReminder = useCallback(async () => {
+    if (!profile) return;
+    const nextProfile = {
+      ...profile,
+      odometerReminderDismissedAt: new Date().toISOString()
+    };
+    await saveVehicleProfile(nextProfile);
+    setProfile(nextProfile);
+  }, [profile]);
+
   const recordService = useCallback(
     async (record: ServiceRecord) => {
       if (!profile) return;
@@ -107,6 +117,7 @@ export function useAppData() {
     updateProfile,
     recordOdometer,
     recordService,
+    dismissOdometerReminder,
     resetAll
   };
 }

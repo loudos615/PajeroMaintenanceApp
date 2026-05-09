@@ -101,6 +101,9 @@ h2 {
 }
 
 .vehicle-hero,
+.odometer-card,
+.reminder-banner,
+.detail-card,
 .detail-hero,
 .confirm-panel {
   padding: 22px;
@@ -108,6 +111,27 @@ h2 {
   border-radius: 8px;
   background: linear-gradient(145deg, rgb(32 40 41 / 0.94), rgb(20 25 27 / 0.94));
   box-shadow: var(--shadow);
+}
+
+.vehicle-hero h1 {
+  margin-bottom: 0;
+}
+
+.odometer-card,
+.reminder-banner {
+  margin-top: 14px;
+}
+
+.reminder-banner {
+  display: grid;
+  gap: 14px;
+  background: rgb(244 185 66 / 0.13);
+  border-color: rgb(244 185 66 / 0.35);
+}
+
+.reminder-banner p {
+  margin-bottom: 0;
+  color: var(--muted);
 }
 
 .vehicle-facts {
@@ -234,6 +258,10 @@ dd {
 
 .section-block {
   margin-top: 18px;
+}
+
+.detail-card {
+  box-shadow: none;
 }
 
 .section-heading,
@@ -388,6 +416,29 @@ dd {
   background: var(--panel);
 }
 
+.history-card__topline {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.odometer-history-list {
+  margin-top: 12px;
+}
+
+.full-width-button {
+  width: 100%;
+}
+
+.settings-note {
+  margin: 0;
+  padding: 12px;
+  border-radius: 8px;
+  color: var(--muted);
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+}
+
 .empty-state {
   color: var(--muted);
   border: 1px dashed var(--line);
@@ -528,7 +579,7 @@ textarea {
   bottom: 0;
   z-index: 10;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 4px;
   padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
   background: rgb(15 19 20 / 0.96);
@@ -553,26 +604,6 @@ textarea {
 .bottom-nav__button--active {
   color: #181302;
   background: var(--accent);
-}
-
-.offline-indicator {
-  position: sticky;
-  top: 0;
-  z-index: 9;
-  min-height: 34px;
-  padding: calc(5px + env(safe-area-inset-top)) 12px 6px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 7px;
-  color: var(--muted);
-  background: rgb(15 19 20 / 0.88);
-  border-bottom: 1px solid var(--line);
-  font-size: 0.82rem;
-}
-
-.offline-indicator--ready {
-  color: #d9ffdf;
 }
 
 .loader {

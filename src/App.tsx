@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { registerSW } from "virtual:pwa-register";
 import { BottomNav } from "./components/BottomNav";
-import { OfflineIndicator } from "./components/OfflineIndicator";
 import { useAppData } from "./hooks/useAppData";
 import { useHashRoute } from "./hooks/useHashRoute";
 import { Dashboard } from "./pages/Dashboard";
@@ -10,39 +9,13 @@ import { MaintenanceList } from "./pages/MaintenanceList";
 import { OdometerScan } from "./pages/OdometerScan";
 import { Settings } from "./pages/Settings";
 
-function useOnlineState() {
-  const [online, setOnline] = useState(() => navigator.onLine);
-
-  useEffect(() => {
-    const update = () => setOnline(navigator.onLine);
-    window.addEventListener("online", update);
-    window.addEventListener("offline", update);
-    return () => {
-      window.removeEventListener("online", update);
-      window.removeEventListener("offline", update);
-    };
-  }, []);
-
-  return online;
-}
-
 export default function App() {
   const route = useHashRoute();
   const data = useAppData();
-  const online = useOnlineState();
-  const [offlineReady, setOfflineReady] = useState(false);
 
   useEffect(() => {
     registerSW({
-      immediate: true,
-      onOfflineReady() {
-        setOfflineReady(true);
-      },
-      onRegisteredSW(_swUrl, registration) {
-        if (registration?.active) {
-          setOfflineReady(true);
-        }
-      }
+      immediate: true
     });
   }, []);
 
@@ -61,7 +34,6 @@ export default function App() {
 
   return (
     <div className="app-shell">
-      <OfflineIndicator offlineReady={offlineReady} online={online} />
       {data.error ? <div className="top-error">{data.error}</div> : null}
 
       {route.name === "maintenance" ? <MaintenanceList dueInfos={data.dueInfos} /> : null}
@@ -85,12 +57,20 @@ export default function App() {
       {route.name === "settings" ? (
         <Settings
           profile={data.profile}
+          odometerReadings={data.odometerReadings}
           onSaveProfile={data.updateProfile}
           onImportComplete={data.reload}
           onReset={data.resetAll}
         />
       ) : null}
-      {["dashboard", ""].includes(route.name) ? <Dashboard profile={data.profile} dueInfos={data.dueInfos} /> : null}
+      {["dashboard", ""].includes(route.name) ? (
+        <Dashboard
+          profile={data.profile}
+          dueInfos={data.dueInfos}
+          odometerReadings={data.odometerReadings}
+          onDismissOdometerReminder={data.dismissOdometerReminder}
+        />
+      ) : null}
 
       <BottomNav active={active} />
     </div>

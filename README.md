@@ -7,7 +7,7 @@ Offline-first Progressive Web App for one vehicle:
 - Model code: V78W
 - Engine: 4M41 3.2 Di-D
 - Transmission: automatic V5A51
-- VIN: JMBLYV78W1J007732
+- VIN: stored in app settings
 
 This is a private local tracker, not a generic vehicle maintenance service. It has no backend, login, analytics, cloud storage, or remote database. Service records, odometer readings, profile settings, imports, and exports stay in the browser's IndexedDB on the device.
 

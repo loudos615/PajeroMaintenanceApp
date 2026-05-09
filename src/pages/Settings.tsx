@@ -1,42 +1,68 @@
 import { Download, RotateCcw, Upload } from "lucide-react";
-import { type ChangeEvent, type FormEvent, useState } from "react";
+import { type ChangeEvent, type FormEvent, useEffect, useMemo, useState } from "react";
 import { exportUserData, importUserData } from "../db/indexedDb";
-import type { AppExport, VehicleProfile } from "../types";
+import type { AppExport, OdometerReading, VehicleProfile } from "../types";
+import { formatDate, formatKm } from "../utils/format";
 
 interface SettingsProps {
   profile: VehicleProfile;
+  odometerReadings: OdometerReading[];
   onSaveProfile: (profile: VehicleProfile) => Promise<void>;
   onImportComplete: () => Promise<void>;
   onReset: () => Promise<void>;
 }
 
-export function Settings({ profile, onSaveProfile, onImportComplete, onReset }: SettingsProps) {
-  const [draft, setDraft] = useState(profile);
+function methodLabel(method: OdometerReading["method"]): string {
+  return method === "ocr" ? "OCR" : "manual";
+}
+
+function downloadJson(filename: string, data: unknown) {
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const anchor = document.createElement("a");
+  anchor.href = url;
+  anchor.download = filename;
+  anchor.click();
+  URL.revokeObjectURL(url);
+}
+
+export function Settings({ profile, odometerReadings, onSaveProfile, onImportComplete, onReset }: SettingsProps) {
+  const [unknownHistoryMode, setUnknownHistoryMode] = useState(profile.unknownHistoryMode);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  function updateDraft<Value extends keyof VehicleProfile>(key: Value, value: VehicleProfile[Value]) {
-    setDraft((current) => ({ ...current, [key]: value }));
-  }
+  useEffect(() => {
+    setUnknownHistoryMode(profile.unknownHistoryMode);
+  }, [profile.unknownHistoryMode]);
 
-  async function saveProfile(event: FormEvent<HTMLFormElement>) {
+  const sortedOdometerReadings = useMemo(
+    () => [...odometerReadings].sort((a, b) => b.date.localeCompare(a.date)),
+    [odometerReadings]
+  );
+
+  async function saveSettings(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setError(null);
     setMessage(null);
-    await onSaveProfile(draft);
-    setMessage("Vehicle profile saved.");
+    await onSaveProfile({
+      ...profile,
+      unknownHistoryMode
+    });
+    setMessage("Settings saved.");
   }
 
   async function handleExport() {
     const data = await exportUserData();
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const anchor = document.createElement("a");
-    anchor.href = url;
-    anchor.download = `pajero-maintenance-${new Date().toISOString().slice(0, 10)}.json`;
-    anchor.click();
-    URL.revokeObjectURL(url);
+    downloadJson(`pajero-maintenance-${new Date().toISOString().slice(0, 10)}.json`, data);
     setMessage("Export prepared.");
+  }
+
+  function handleOdometerExport() {
+    downloadJson(`pajero-odometer-history-${new Date().toISOString().slice(0, 10)}.json`, {
+      exportedAt: new Date().toISOString(),
+      odometerReadings: sortedOdometerReadings
+    });
+    setMessage("Odometer history export prepared.");
   }
 
   async function handleImport(event: ChangeEvent<HTMLInputElement>) {
@@ -71,55 +97,57 @@ export function Settings({ profile, onSaveProfile, onImportComplete, onReset }: 
         <h1>Settings</h1>
       </section>
 
-      <section className="section-block">
-        <h2>Vehicle profile</h2>
-        <form className="form-stack" onSubmit={saveProfile}>
-          <label>
-            Vehicle name
-            <input value={draft.name} onChange={(event) => updateDraft("name", event.target.value)} />
-          </label>
-          <label>
-            VIN
-            <input value={draft.vin} onChange={(event) => updateDraft("vin", event.target.value)} />
-          </label>
-          <label>
-            Model code
-            <input value={draft.modelCode} onChange={(event) => updateDraft("modelCode", event.target.value)} />
-          </label>
-          <label>
-            Engine
-            <input value={draft.engine} onChange={(event) => updateDraft("engine", event.target.value)} />
-          </label>
-          <label>
-            Transmission
-            <input value={draft.transmission} onChange={(event) => updateDraft("transmission", event.target.value)} />
-          </label>
-          <label>
-            Current odometer km
-            <input
-              inputMode="numeric"
-              type="number"
-              value={draft.currentOdometerKm ?? ""}
-              onChange={(event) => updateDraft("currentOdometerKm", event.target.value ? Number(event.target.value) : null)}
-            />
-          </label>
-          <label>
-            Purchase date
-            <input
-              type="date"
-              value={draft.purchaseDate ?? ""}
-              onChange={(event) => updateDraft("purchaseDate", event.target.value || null)}
-            />
-          </label>
-          <label>
-            Purchase odometer km
-            <input
-              inputMode="numeric"
-              type="number"
-              value={draft.purchaseOdometerKm ?? ""}
-              onChange={(event) => updateDraft("purchaseOdometerKm", event.target.value ? Number(event.target.value) : null)}
-            />
-          </label>
+      <section className="section-block detail-card">
+        <h2>Vehicle details</h2>
+        <dl className="detail-grid">
+          <div className="detail-row">
+            <dt>Vehicle</dt>
+            <dd>Mitsubishi Pajero III / Montero / Shogun Gen 3</dd>
+          </div>
+          <div className="detail-row">
+            <dt>Year</dt>
+            <dd>2001</dd>
+          </div>
+          <div className="detail-row">
+            <dt>Model code</dt>
+            <dd>{profile.modelCode}</dd>
+          </div>
+          <div className="detail-row">
+            <dt>Engine</dt>
+            <dd>{profile.engine}</dd>
+          </div>
+          <div className="detail-row">
+            <dt>Transmission</dt>
+            <dd>automatic {profile.transmission.replace(/^automatic\s+/i, "").replace(/\s+automatic$/i, "")}</dd>
+          </div>
+          <div className="detail-row">
+            <dt>VIN</dt>
+            <dd>{profile.vin}</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section className="section-block detail-card">
+        <h2>Purchase baseline</h2>
+        <dl className="detail-grid">
+          <div className="detail-row">
+            <dt>Purchased</dt>
+            <dd>{formatDate(profile.purchaseDate)}</dd>
+          </div>
+          <div className="detail-row">
+            <dt>Purchase odometer</dt>
+            <dd>{formatKm(profile.purchaseOdometerKm)}</dd>
+          </div>
+          <div className="detail-row">
+            <dt>Current odometer</dt>
+            <dd>{formatKm(profile.currentOdometerKm)}</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section className="section-block detail-card">
+        <h2>Maintenance settings</h2>
+        <form className="form-stack" onSubmit={saveSettings}>
           <label className="toggle-row">
             <span>
               <strong>Unknown history mode</strong>
@@ -127,21 +155,55 @@ export function Settings({ profile, onSaveProfile, onImportComplete, onReset }: 
             </span>
             <input
               type="checkbox"
-              checked={draft.unknownHistoryMode}
-              onChange={(event) => updateDraft("unknownHistoryMode", event.target.checked)}
+              checked={unknownHistoryMode}
+              onChange={(event) => setUnknownHistoryMode(event.target.checked)}
             />
           </label>
+
+          <p className="settings-note">
+            Offline web apps cannot schedule reliable monthly iPhone notifications while closed. This app shows odometer
+            reminders when opened.
+          </p>
 
           {message ? <p className="form-success">{message}</p> : null}
           {error ? <p className="form-error">{error}</p> : null}
 
           <button className="primary-button" type="submit">
-            Save profile
+            Save settings
           </button>
         </form>
       </section>
 
-      <section className="section-block">
+      <section className="section-block detail-card">
+        <div className="section-heading">
+          <h2>Odometer history</h2>
+          <span className="muted">{sortedOdometerReadings.length} updates</span>
+        </div>
+
+        <button className="secondary-button full-width-button" type="button" onClick={handleOdometerExport}>
+          <Download aria-hidden="true" size={20} />
+          Export odometer history JSON
+        </button>
+
+        {sortedOdometerReadings.length ? (
+          <div className="history-list odometer-history-list">
+            {sortedOdometerReadings.map((reading) => (
+              <article className="history-card" key={reading.id}>
+                <div className="history-card__topline">
+                  <strong>{formatDate(reading.date)}</strong>
+                  <span>{formatKm(reading.odometerKm)}</span>
+                </div>
+                <p className="muted">Method: {methodLabel(reading.method)}</p>
+                {reading.rawOcrText ? <p className="verification-value">OCR text: {reading.rawOcrText}</p> : null}
+              </article>
+            ))}
+          </div>
+        ) : (
+          <p className="empty-state">No confirmed odometer updates yet.</p>
+        )}
+      </section>
+
+      <section className="section-block detail-card">
         <h2>Local data</h2>
         <div className="button-grid">
           <button className="secondary-button" type="button" onClick={handleExport}>

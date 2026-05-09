@@ -1,18 +1,43 @@
+import { differenceInCalendarDays, parseISO } from "date-fns";
 import { Camera, Gauge, PenLine } from "lucide-react";
 import { MaintenanceCard } from "../components/MaintenanceCard";
 import { navigateTo } from "../hooks/useHashRoute";
-import type { DueInfo, VehicleProfile } from "../types";
-import { dueStatusRank, formatKm, priorityRank } from "../utils/format";
+import type { DueInfo, OdometerReading, VehicleProfile } from "../types";
+import { dueStatusRank, formatDate, formatKm, priorityRank } from "../utils/format";
 
 interface DashboardProps {
   profile: VehicleProfile;
   dueInfos: DueInfo[];
+  odometerReadings: OdometerReading[];
+  onDismissOdometerReminder: () => Promise<void>;
 }
 
-export function Dashboard({ profile, dueInfos }: DashboardProps) {
+function getLastOdometerReading(readings: OdometerReading[]): OdometerReading | null {
+  return [...readings].sort((a, b) => b.date.localeCompare(a.date))[0] ?? null;
+}
+
+function shouldShowOdometerReminder(profile: VehicleProfile, readings: OdometerReading[]): boolean {
+  const dismissedAt = profile.odometerReminderDismissedAt;
+  const today = new Date();
+
+  if (dismissedAt && differenceInCalendarDays(today, parseISO(dismissedAt)) < 7) {
+    return false;
+  }
+
+  const lastReading = getLastOdometerReading(readings);
+  const baselineDate = lastReading?.date ?? profile.purchaseDate;
+  if (!baselineDate) return false;
+
+  return differenceInCalendarDays(today, parseISO(baselineDate)) > 30;
+}
+
+export function Dashboard({ profile, dueInfos, odometerReadings, onDismissOdometerReminder }: DashboardProps) {
   const overdueCount = dueInfos.filter((info) => info.status === "overdue").length;
   const dueSoonCount = dueInfos.filter((info) => info.status === "dueSoon").length;
   const baselineCount = dueInfos.filter((info) => info.status === "baselineDueNow").length;
+  const lastReading = getLastOdometerReading(odometerReadings);
+  const lastUpdatedDate = lastReading?.date ?? profile.purchaseDate;
+  const showReminder = shouldShowOdometerReminder(profile, odometerReadings);
   const urgentItems = [...dueInfos]
     .sort((a, b) => dueStatusRank(a.status) - dueStatusRank(b.status) || priorityRank(a.item) - priorityRank(b.item))
     .slice(0, 6);
@@ -20,16 +45,40 @@ export function Dashboard({ profile, dueInfos }: DashboardProps) {
   return (
     <main className="page">
       <section className="vehicle-hero">
-        <p className="eyebrow">Private tracker</p>
-        <h1>{profile.name}</h1>
-        <dl className="vehicle-facts">
+        <h1>Pajero V78W</h1>
+      </section>
+
+      {showReminder ? (
+        <section className="reminder-banner">
           <div>
-            <dt>VIN</dt>
-            <dd>{profile.vin}</dd>
+            <h2>Update odometer</h2>
+            <p>Your Pajero odometer has not been updated for more than 30 days.</p>
           </div>
+          <div className="button-grid">
+            <button className="primary-button" type="button" onClick={() => navigateTo("/odometer?mode=manual")}>
+              <PenLine aria-hidden="true" size={20} />
+              Update manually
+            </button>
+            <button className="secondary-button" type="button" onClick={() => navigateTo("/odometer?mode=scan")}>
+              <Camera aria-hidden="true" size={20} />
+              Scan odometer
+            </button>
+            <button className="secondary-button" type="button" onClick={() => void onDismissOdometerReminder()}>
+              Dismiss for 7 days
+            </button>
+          </div>
+        </section>
+      ) : null}
+
+      <section className="odometer-card">
+        <dl className="vehicle-facts">
           <div>
             <dt>Current odometer</dt>
             <dd>{formatKm(profile.currentOdometerKm)}</dd>
+          </div>
+          <div>
+            <dt>Last updated</dt>
+            <dd>{formatDate(lastUpdatedDate)}</dd>
           </div>
         </dl>
         <div className="button-grid">

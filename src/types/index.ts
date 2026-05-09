@@ -26,6 +26,7 @@ export interface VehicleProfile {
   purchaseDate: string | null;
   purchaseOdometerKm: number | null;
   unknownHistoryMode: boolean;
+  odometerReminderDismissedAt: string | null;
 }
 
 export interface MaintenanceItem {

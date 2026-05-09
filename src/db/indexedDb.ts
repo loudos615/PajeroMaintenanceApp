@@ -12,11 +12,24 @@ export const DEFAULT_VEHICLE_PROFILE: VehicleProfile = {
   modelCode: "V78W",
   engine: "4M41 3.2 Di-D",
   transmission: "V5A51 automatic",
-  currentOdometerKm: null,
-  purchaseDate: null,
-  purchaseOdometerKm: null,
-  unknownHistoryMode: true
+  currentOdometerKm: 287000,
+  purchaseDate: "2026-04-22",
+  purchaseOdometerKm: 287000,
+  unknownHistoryMode: true,
+  odometerReminderDismissedAt: null
 };
+
+function normalizeVehicleProfile(profile: Partial<VehicleProfile> | null | undefined): VehicleProfile {
+  return {
+    ...DEFAULT_VEHICLE_PROFILE,
+    ...profile,
+    id: PROFILE_ID,
+    purchaseDate: profile?.purchaseDate ?? DEFAULT_VEHICLE_PROFILE.purchaseDate,
+    purchaseOdometerKm: profile?.purchaseOdometerKm ?? DEFAULT_VEHICLE_PROFILE.purchaseOdometerKm,
+    unknownHistoryMode: profile?.unknownHistoryMode ?? DEFAULT_VEHICLE_PROFILE.unknownHistoryMode,
+    odometerReminderDismissedAt: profile?.odometerReminderDismissedAt ?? null
+  };
+}
 
 interface PajeroMaintenanceDb extends DBSchema {
   vehicleProfile: {
@@ -69,7 +82,13 @@ export async function getVehicleProfile(): Promise<VehicleProfile> {
   const db = await getDb();
   const existing = await db.get("vehicleProfile", PROFILE_ID);
 
-  if (existing) return existing;
+  if (existing) {
+    const normalized = normalizeVehicleProfile(existing);
+    if (JSON.stringify(existing) !== JSON.stringify(normalized)) {
+      await db.put("vehicleProfile", normalized);
+    }
+    return normalized;
+  }
 
   await db.put("vehicleProfile", DEFAULT_VEHICLE_PROFILE);
   return DEFAULT_VEHICLE_PROFILE;
@@ -137,7 +156,7 @@ export async function importUserData(data: AppExport): Promise<void> {
     tx.objectStore("odometerReadings").clear()
   ]);
 
-  await tx.objectStore("vehicleProfile").put({ ...data.vehicleProfile, id: PROFILE_ID });
+  await tx.objectStore("vehicleProfile").put(normalizeVehicleProfile(data.vehicleProfile));
 
   for (const record of data.serviceRecords) {
     await tx.objectStore("serviceRecords").put(record);
