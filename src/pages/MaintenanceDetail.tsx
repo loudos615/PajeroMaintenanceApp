@@ -1,8 +1,10 @@
 import { ArrowLeft, CheckCircle2 } from "lucide-react";
 import { type FormEvent, type ReactNode, useEffect, useMemo, useState } from "react";
+import { CopyChip } from "../components/CopyChip";
 import { MarkDoneSheet } from "../components/MarkDoneSheet";
 import { StatusBadge } from "../components/StatusBadge";
 import { navigateTo } from "../hooks/useHashRoute";
+import { useCopyFeedback } from "../hooks/useCopyFeedback";
 import type {
   AftermarketExample,
   DueInfo,
@@ -14,6 +16,7 @@ import type {
   VehicleProfile
 } from "../types";
 import { formatDate, formatInterval, formatKm } from "../utils/format";
+import { extractPartCodes, splitPartNumberField, stripPartCodes } from "../utils/partNumbers";
 
 interface MaintenanceDetailProps {
   itemId: string;
@@ -44,6 +47,29 @@ function DetailRow({ label, value }: { label: string; value: ReactNode }) {
       <dt>{label}</dt>
       <dd>{value}</dd>
     </div>
+  );
+}
+
+function CodeChips({ codes, onCopied }: { codes: string[]; onCopied: (code: string) => void }) {
+  if (!codes.length) return null;
+  return (
+    <span className="copy-chip-row">
+      {codes.map((code) => (
+        <CopyChip key={code} value={code} ariaLabel={`Copy part number ${code}`} onCopied={onCopied} />
+      ))}
+    </span>
+  );
+}
+
+function TextWithCopyCodes({ text, onCopied }: { text: string; onCopied: (code: string) => void }) {
+  const codes = extractPartCodes(text);
+  const label = stripPartCodes(text, codes);
+
+  return (
+    <span className="copyable-text-line">
+      {label ? <span>{label}</span> : null}
+      <CodeChips codes={codes} onCopied={onCopied} />
+    </span>
   );
 }
 
@@ -144,7 +170,7 @@ function getPracticalNotes(item: MaintenanceItem): string[] {
   );
 }
 
-function PartsAndFluids({ rows }: { rows: PartFluidRow[] }) {
+function PartsAndFluids({ rows, onCopied }: { rows: PartFluidRow[]; onCopied: (code: string) => void }) {
   if (!rows.length) return null;
 
   return (
@@ -158,11 +184,26 @@ function PartsAndFluids({ rows }: { rows: PartFluidRow[] }) {
             <DetailRow label="Specification" value={row.specification} />
             <DetailRow label="Capacity / quantity" value={row.capacity} />
             <DetailRow label="Buy quantity" value={row.buyQuantity} />
-            <DetailRow label="OEM part number" value={row.oemPartNumber} />
+            <DetailRow
+              label="OEM part number"
+              value={
+                splitPartNumberField(row.oemPartNumber).length ? (
+                  <CodeChips codes={splitPartNumberField(row.oemPartNumber)} onCopied={onCopied} />
+                ) : null
+              }
+            />
             <DetailRow label="OEM part name" value={row.oemPartName} />
             <DetailRow
               label="Aftermarket examples"
-              value={row.aftermarketExamples.length ? row.aftermarketExamples.join(", ") : null}
+              value={
+                row.aftermarketExamples.length ? (
+                  <span className="copy-line-stack">
+                    {row.aftermarketExamples.map((example) => (
+                      <TextWithCopyCodes key={example} text={example} onCopied={onCopied} />
+                    ))}
+                  </span>
+                ) : null
+              }
             />
             <DetailRow label="Note" value={row.note} />
           </dl>
@@ -182,7 +223,7 @@ function hasChecklistContent(checklist: ReplacementChecklist | null | undefined)
   );
 }
 
-function ChecklistGroup({ title, items }: { title: string; items?: string[] }) {
+function ChecklistGroup({ title, items, onCopied }: { title: string; items?: string[]; onCopied: (code: string) => void }) {
   const cleaned = (items ?? []).map((item) => cleanText(textValue(item))).filter((item): item is string => Boolean(item));
   if (!cleaned.length) return null;
   return (
@@ -190,19 +231,27 @@ function ChecklistGroup({ title, items }: { title: string; items?: string[] }) {
       <h3>{title}</h3>
       <ul className="notes-list">
         {cleaned.map((item) => (
-          <li key={item}>{item}</li>
+          <li key={item}>
+            <TextWithCopyCodes text={item} onCopied={onCopied} />
+          </li>
         ))}
       </ul>
     </div>
   );
 }
 
-function ReplacementChecklistView({ checklist }: { checklist: ReplacementChecklist }) {
+function ReplacementChecklistView({
+  checklist,
+  onCopied
+}: {
+  checklist: ReplacementChecklist;
+  onCopied: (code: string) => void;
+}) {
   return (
     <div className="checklist-stack">
-      <ChecklistGroup title="Main parts" items={checklist.mainParts} />
-      <ChecklistGroup title="Seals / washers / hardware" items={checklist.sealsWashersHardware} />
-      <ChecklistGroup title="Useful extras" items={checklist.usefulExtras} />
+      <ChecklistGroup title="Main parts" items={checklist.mainParts} onCopied={onCopied} />
+      <ChecklistGroup title="Seals / washers / hardware" items={checklist.sealsWashersHardware} onCopied={onCopied} />
+      <ChecklistGroup title="Useful extras" items={checklist.usefulExtras} onCopied={onCopied} />
       {textValue(checklist.notes) ? (
         <div className="checklist-group">
           <h3>Notes</h3>
@@ -307,6 +356,8 @@ export function MaintenanceDetail({
 }: MaintenanceDetailProps) {
   const dueInfo = dueInfos.find((info) => info.item.id === itemId);
   const [sheetOpen, setSheetOpen] = useState(false);
+  const { copyMessage, setCopyMessage } = useCopyFeedback();
+  const handleCopied = (code: string) => setCopyMessage(`Copied: ${code}`);
 
   const itemRecords = useMemo(
     () =>
@@ -387,14 +438,14 @@ export function MaintenanceDetail({
       {itemParts.length ? (
         <section className="section-block detail-card">
           <h2>Parts and fluids</h2>
-          <PartsAndFluids rows={itemParts} />
+          <PartsAndFluids rows={itemParts} onCopied={handleCopied} />
         </section>
       ) : null}
 
       {replacementChecklist ? (
         <section className="section-block detail-card">
           <h2>Replacement parts checklist</h2>
-          <ReplacementChecklistView checklist={replacementChecklist} />
+          <ReplacementChecklistView checklist={replacementChecklist} onCopied={handleCopied} />
         </section>
       ) : null}
 
@@ -443,6 +494,8 @@ export function MaintenanceDetail({
       {sheetOpen ? (
         <MarkDoneSheet item={item} profile={profile} onClose={() => setSheetOpen(false)} onSave={onSaveRecord} />
       ) : null}
+
+      {copyMessage ? <div className="copy-toast">{copyMessage}</div> : null}
     </main>
   );
 }

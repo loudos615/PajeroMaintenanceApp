@@ -1,8 +1,10 @@
 import { Download, RotateCcw, Upload } from "lucide-react";
-import { type ChangeEvent, useMemo, useState } from "react";
+import { type ChangeEvent, type ReactNode, useMemo, useState } from "react";
 import { APP_VERSION } from "../app/version";
+import { CopyChip } from "../components/CopyChip";
 import { maintenanceVehicleProfile } from "../data/maintenanceItems";
 import { exportUserData, importUserData } from "../db/indexedDb";
+import { useCopyFeedback } from "../hooks/useCopyFeedback";
 import { checkForUpdateAndReload } from "../services/appUpdate";
 import type { AppExport, OdometerReading, VehicleProfile } from "../types";
 import { formatDate, formatKm } from "../utils/format";
@@ -28,7 +30,7 @@ function downloadJson(filename: string, data: unknown) {
   URL.revokeObjectURL(url);
 }
 
-function Detail({ label, value }: { label: string; value: string }) {
+function Detail({ label, value }: { label: string; value: ReactNode }) {
   return (
     <div className="detail-row">
       <dt>{label}</dt>
@@ -46,6 +48,7 @@ export function Settings({ profile, odometerReadings, onImportComplete, onReset 
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [checkingForUpdate, setCheckingForUpdate] = useState(false);
+  const { copyMessage, setCopyMessage } = useCopyFeedback();
 
   const sortedOdometerReadings = useMemo(
     () => [...odometerReadings].sort((a, b) => b.date.localeCompare(a.date)),
@@ -127,7 +130,16 @@ export function Settings({ profile, odometerReadings, onImportComplete, onReset 
           <Detail label="Transmission" value={transmissionLabel(maintenanceVehicleProfile.transmission)} />
           <Detail label="Drive" value="4WD / Super Select" />
           <Detail label="Power" value={`${maintenanceVehicleProfile.powerKw ?? 121} kW`} />
-          <Detail label="VIN" value={profile.vin} />
+          <Detail
+            label="VIN"
+            value={
+              <CopyChip
+                value={profile.vin}
+                ariaLabel={`Copy VIN ${profile.vin}`}
+                onCopied={() => setCopyMessage("Copied VIN")}
+              />
+            }
+          />
         </dl>
       </section>
 
@@ -210,6 +222,8 @@ export function Settings({ profile, odometerReadings, onImportComplete, onReset 
           Reset local data
         </button>
       </section>
+
+      {copyMessage ? <div className="copy-toast">{copyMessage}</div> : null}
     </main>
   );
 }
