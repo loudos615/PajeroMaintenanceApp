@@ -5,7 +5,7 @@ import { useAppData } from "./hooks/useAppData";
 import { useHashRoute } from "./hooks/useHashRoute";
 import { Dashboard } from "./pages/Dashboard";
 import { MaintenanceDetail } from "./pages/MaintenanceDetail";
-import { MaintenanceList } from "./pages/MaintenanceList";
+import { MAINTENANCE_LIST_RESTORE_KEY, MaintenanceList } from "./pages/MaintenanceList";
 import { OdometerScan } from "./pages/OdometerScan";
 import { Settings } from "./pages/Settings";
 
@@ -37,6 +37,11 @@ export default function App() {
     };
   }, []);
 
+  useEffect(() => {
+    if (route.name === "maintenance" || route.name === "item") return;
+    sessionStorage.removeItem(MAINTENANCE_LIST_RESTORE_KEY);
+  }, [route.name]);
+
   if (data.loading || !data.profile) {
     return (
       <div className="app-shell">
@@ -54,7 +59,7 @@ export default function App() {
     <div className="app-shell">
       {data.error ? <div className="top-error">{data.error}</div> : null}
 
-      {route.name === "maintenance" ? <MaintenanceList dueInfos={data.dueInfos} /> : null}
+      {route.name === "maintenance" ? <MaintenanceList dueInfos={data.dueInfos} serviceRecords={data.serviceRecords} /> : null}
       {route.name === "item" ? (
         <MaintenanceDetail
           itemId={decodeURIComponent(route.params[0] ?? "")}

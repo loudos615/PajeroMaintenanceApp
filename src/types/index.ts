@@ -54,10 +54,10 @@ export interface MaintenanceVerification {
 }
 
 export interface ReplacementChecklist {
-  mainParts?: string[];
-  sealsWashersHardware?: string[];
-  usefulExtras?: string[];
-  notes?: string | null;
+  mainParts?: Array<string | MaintenancePart>;
+  sealsWashersHardware?: Array<string | MaintenancePart>;
+  usefulExtras?: Array<string | MaintenancePart>;
+  notes?: string | string[] | null;
 }
 
 export interface MaintenanceVehicleProfile {

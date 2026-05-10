@@ -3,10 +3,7 @@ const NON_CODES = new Set(["NOT_APPLICABLE", "TO_VERIFY", "UNIVERSAL"]);
 
 export function splitPartNumberField(value: string | null | undefined): string[] {
   if (!value) return [];
-  return value
-    .split(/[\/,;]/)
-    .map((part) => part.trim())
-    .filter((part) => part && !NON_CODES.has(part.toUpperCase()));
+  return extractPartCodes(value);
 }
 
 export function extractPartCodes(value: string): string[] {

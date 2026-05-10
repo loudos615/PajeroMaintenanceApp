@@ -358,6 +358,24 @@ dd {
   padding-bottom: 6px;
 }
 
+.list-controls {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.search-field,
+.control-label {
+  display: grid;
+  gap: 7px;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.control-label {
+  margin-bottom: 7px;
+}
+
 .chip {
   min-width: max-content;
   min-height: 42px;
@@ -499,6 +517,11 @@ dd {
 .checklist-group h3 {
   margin: 0;
   font-size: 1rem;
+}
+
+.checklist-part-line {
+  display: grid;
+  gap: 5px;
 }
 
 .inline-list {

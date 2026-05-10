@@ -1556,91 +1556,221 @@
       }
     },
     {
-      "id": "brakes_pads_and_discs_inspect",
-      "originalItemNumber": 42,
       "system": "Brakes",
-      "name": "Pads and discs",
-      "action": "Inspect",
       "officialIntervalKm": 20000,
       "officialIntervalMonths": 12,
       "recommendedIntervalKm": 10000,
       "recommendedIntervalMonths": 6,
       "priority": "Critical",
-      "difficulty": "Easy DIY",
       "baselineDue": true,
       "conditionBased": false,
       "diagnosticOnly": false,
       "showInRegularDueList": true,
-      "symptomsIfNeglected": "Noise, pull, vibration, reduced braking",
+      "fluid": null,
+      "originalItemNumber": 42,
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "id": "brakes_front_brake_pads_inspect_replace",
+      "name": "Front brake pads",
+      "action": "Inspect / Replace on condition",
+      "difficulty": "Easy DIY",
+      "symptomsIfNeglected": "Reduced braking performance, noise, disc damage, uneven brake pull",
       "parts": [
         {
           "role": "Front brake pad set",
           "oemPartNumber": "MN116445",
-          "confidence": "likely"
-        },
-        {
-          "role": "Front brake disc",
-          "oemPartNumber": "MR407116",
-          "confidence": "likely"
-        },
-        {
-          "role": "Rear brake pad set",
-          "oemPartNumber": "MR510544 / MN102628",
-          "confidence": "likely"
-        },
-        {
-          "role": "Rear brake disc",
-          "oemPartNumber": "MR418067",
-          "confidence": "likely"
-        },
-        {
-          "role": "Parking brake shoes",
-          "oemPartNumber": "MN102645 / MN150861 / MN186248 / MR535718",
-          "confidence": "likely"
-        },
-        {
-          "role": "Front clip set",
+          "oemPartName": "PAD SET, FRONT BRAKE",
           "confidence": "likely",
-          "oemPartNumber": "4605A057"
-        },
-        {
-          "role": "Rear clip set",
-          "confidence": "likely",
-          "oemPartNumber": "MR510545"
-        },
-        {
-          "role": "Front caliper seal kit",
-          "confidence": "likely",
-          "oemPartNumber": "MR407427"
-        },
-        {
-          "role": "Rear caliper seal kit",
-          "confidence": "likely",
-          "oemPartNumber": "MR510543"
+          "note": "Confirm pad shape before ordering."
         }
       ],
+      "appNotes": [
+        "Inspect pad thickness, uneven wear, cracks, contamination and caliper movement.",
+        "Replace when worn, cracked, contaminated or unevenly worn."
+      ],
+      "replacementChecklist": {
+        "mainParts": [
+          {
+            "role": "Front brake pad set",
+            "oemPartNumber": "MN116445",
+            "note": "Confirm pad shape before ordering."
+          }
+        ],
+        "sealsWashersHardware": [],
+        "usefulExtras": [
+          "Brake cleaner",
+          "Brake pad grease / anti-squeal paste",
+          "Wire brush"
+        ],
+        "notes": [
+          "Replace pads per axle side set.",
+          "Inspect guide pins and boots while pads are removed."
+        ]
+      }
+    },
+    {
+      "system": "Brakes",
+      "officialIntervalKm": 20000,
+      "officialIntervalMonths": 12,
+      "recommendedIntervalKm": 10000,
+      "recommendedIntervalMonths": 6,
+      "priority": "Critical",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "fluid": null,
+      "originalItemNumber": 42,
       "appDisplay": {
         "hideEmptyFields": true
       },
-      "fluid": null,
+      "id": "brakes_front_brake_discs_inspect_replace",
+      "name": "Front brake discs",
+      "action": "Inspect / Replace on condition",
+      "difficulty": "Medium DIY",
+      "symptomsIfNeglected": "Vibration, reduced braking performance, cracking, severe corrosion",
+      "parts": [
+        {
+          "role": "Front brake disc",
+          "oemPartNumber": "MR407116",
+          "oemPartName": "FRONT BRAKE DISC",
+          "confidence": "likely",
+          "note": "290 ? 26 mm candidate. Measure installed disc before ordering."
+        }
+      ],
+      "appNotes": [
+        "Inspect disc thickness, runout, corrosion, cracks and vibration.",
+        "Replace brake discs in pairs."
+      ],
       "replacementChecklist": {
         "mainParts": [
-          "Front brake pad set MN116445",
-          "Front brake discs MR407116",
-          "Rear brake pad set MR510544 / MN102628",
-          "Rear brake discs MR418067",
-          "Parking brake shoes MN102645 / MN150861 / MN186248 / MR535718"
+          {
+            "role": "Front brake discs",
+            "oemPartNumber": "MR407116",
+            "note": "290 ? 26 mm candidate. Measure installed disc before ordering."
+          }
         ],
-        "sealsWashersHardware": [
-          "Front clip set 4605A057 if needed",
-          "Rear clip set MR510545 if needed"
-        ],
+        "sealsWashersHardware": [],
         "usefulExtras": [
           "Brake cleaner",
-          "Ceramic/caliper grease for contact points",
-          "Thread locker where manual requires"
+          "Hub cleaning brush",
+          "Copper-free anti-seize for hub face only"
         ],
-        "notes": "Measure discs and compare pad shape before ordering, but the main candidate numbers are now in the app."
+        "notes": [
+          "Replace discs in pairs.",
+          "Clean hub face before installing new discs.",
+          "Check pads when replacing discs."
+        ]
+      }
+    },
+    {
+      "system": "Brakes",
+      "officialIntervalKm": 20000,
+      "officialIntervalMonths": 12,
+      "recommendedIntervalKm": 10000,
+      "recommendedIntervalMonths": 6,
+      "priority": "Critical",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "fluid": null,
+      "originalItemNumber": 42,
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "id": "brakes_rear_brake_pads_inspect_replace",
+      "name": "Rear brake pads",
+      "action": "Inspect / Replace on condition",
+      "difficulty": "Easy DIY",
+      "symptomsIfNeglected": "Reduced braking performance, noise, disc damage, uneven brake pull",
+      "parts": [
+        {
+          "role": "Rear brake pad set",
+          "oemPartNumber": "MR510544 / MN102628",
+          "oemPartName": "PAD SET, REAR BRAKE",
+          "confidence": "likely",
+          "note": "Show MR510544 and MN102628 as separate copyable chips. Confirm pad shape before ordering."
+        }
+      ],
+      "appNotes": [
+        "Inspect pad thickness, uneven wear, cracks, contamination and caliper movement.",
+        "Replace when worn, cracked, contaminated or unevenly worn."
+      ],
+      "replacementChecklist": {
+        "mainParts": [
+          {
+            "role": "Rear brake pad set",
+            "oemPartNumber": "MR510544 / MN102628",
+            "note": "Show as separate copyable chips. Confirm pad shape before ordering."
+          }
+        ],
+        "sealsWashersHardware": [],
+        "usefulExtras": [
+          "Brake cleaner",
+          "Brake pad grease / anti-squeal paste",
+          "Wire brush"
+        ],
+        "notes": [
+          "Replace pads per axle side set.",
+          "Inspect guide pins and boots while pads are removed."
+        ]
+      }
+    },
+    {
+      "system": "Brakes",
+      "officialIntervalKm": 20000,
+      "officialIntervalMonths": 12,
+      "recommendedIntervalKm": 10000,
+      "recommendedIntervalMonths": 6,
+      "priority": "Critical",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "fluid": null,
+      "originalItemNumber": 42,
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "id": "brakes_rear_brake_discs_inspect_replace",
+      "name": "Rear brake discs",
+      "action": "Inspect / Replace on condition",
+      "difficulty": "Medium DIY",
+      "symptomsIfNeglected": "Vibration, reduced braking performance, parking brake issues, cracking, severe corrosion",
+      "parts": [
+        {
+          "role": "Rear brake disc",
+          "oemPartNumber": "MR418067",
+          "oemPartName": "REAR BRAKE DISC",
+          "confidence": "likely",
+          "note": "300 ? 22 mm candidate. Measure installed disc before ordering."
+        }
+      ],
+      "appNotes": [
+        "Inspect disc thickness, runout, corrosion, cracks and vibration.",
+        "Replace brake discs in pairs.",
+        "Rear brake discs also contain the drum-in-disc parking brake surface."
+      ],
+      "replacementChecklist": {
+        "mainParts": [
+          {
+            "role": "Rear brake discs",
+            "oemPartNumber": "MR418067",
+            "note": "300 ? 22 mm candidate. Measure installed disc before ordering."
+          }
+        ],
+        "sealsWashersHardware": [],
+        "usefulExtras": [
+          "Brake cleaner",
+          "Hub cleaning brush",
+          "Copper-free anti-seize for hub face only"
+        ],
+        "notes": [
+          "Replace discs in pairs.",
+          "Check parking brake shoes and adjustment when rear discs are removed."
+        ]
       }
     },
     {

@@ -214,25 +214,61 @@ function PartsAndFluids({ rows, onCopied }: { rows: PartFluidRow[]; onCopied: (c
 }
 
 function hasChecklistContent(checklist: ReplacementChecklist | null | undefined): checklist is ReplacementChecklist {
+  const notes = getChecklistNotes(checklist?.notes);
   return Boolean(
     checklist &&
       ((checklist.mainParts?.length ?? 0) > 0 ||
         (checklist.sealsWashersHardware?.length ?? 0) > 0 ||
         (checklist.usefulExtras?.length ?? 0) > 0 ||
-        textValue(checklist.notes))
+        notes.length > 0)
   );
 }
 
-function ChecklistGroup({ title, items, onCopied }: { title: string; items?: string[]; onCopied: (code: string) => void }) {
-  const cleaned = (items ?? []).map((item) => cleanText(textValue(item))).filter((item): item is string => Boolean(item));
+function getChecklistNotes(notes: ReplacementChecklist["notes"]): string[] {
+  const values = Array.isArray(notes) ? notes : [notes];
+  return values.map((note) => cleanText(textValue(note))).filter((note): note is string => Boolean(note));
+}
+
+function ChecklistItemRow({ item, onCopied }: { item: string | MaintenancePart; onCopied: (code: string) => void }) {
+  if (typeof item === "string") {
+    const text = cleanText(textValue(item));
+    if (!text) return null;
+    return <TextWithCopyCodes text={text} onCopied={onCopied} />;
+  }
+
+  const role = cleanText(textValue(item.role)) ?? "Part";
+  const partNumbers = splitPartNumberField(cleanPartNumber(item.oemPartNumber));
+  const partName = cleanText(textValue(item.oemPartName));
+  const note = cleanText(textValue(item.note));
+
+  return (
+    <span className="checklist-part-line">
+      <strong>{role}</strong>
+      <CodeChips codes={partNumbers} onCopied={onCopied} />
+      {partName ? <span className="muted">{partName}</span> : null}
+      {note ? <span className="muted">{note}</span> : null}
+    </span>
+  );
+}
+
+function ChecklistGroup({
+  title,
+  items,
+  onCopied
+}: {
+  title: string;
+  items?: Array<string | MaintenancePart>;
+  onCopied: (code: string) => void;
+}) {
+  const cleaned = (items ?? []).filter((item) => (typeof item === "string" ? Boolean(cleanText(textValue(item))) : true));
   if (!cleaned.length) return null;
   return (
     <div className="checklist-group">
       <h3>{title}</h3>
       <ul className="notes-list">
-        {cleaned.map((item) => (
-          <li key={item}>
-            <TextWithCopyCodes text={item} onCopied={onCopied} />
+        {cleaned.map((item, index) => (
+          <li key={`${title}-${index}`}>
+            <ChecklistItemRow item={item} onCopied={onCopied} />
           </li>
         ))}
       </ul>
@@ -247,15 +283,20 @@ function ReplacementChecklistView({
   checklist: ReplacementChecklist;
   onCopied: (code: string) => void;
 }) {
+  const notes = getChecklistNotes(checklist.notes);
   return (
     <div className="checklist-stack">
       <ChecklistGroup title="Main parts" items={checklist.mainParts} onCopied={onCopied} />
       <ChecklistGroup title="Seals / washers / hardware" items={checklist.sealsWashersHardware} onCopied={onCopied} />
       <ChecklistGroup title="Useful extras" items={checklist.usefulExtras} onCopied={onCopied} />
-      {textValue(checklist.notes) ? (
+      {notes.length ? (
         <div className="checklist-group">
           <h3>Notes</h3>
-          <p className="muted">{cleanText(textValue(checklist.notes))}</p>
+          <ul className="notes-list">
+            {notes.map((note) => (
+              <li key={note}>{note}</li>
+            ))}
+          </ul>
         </div>
       ) : null}
     </div>
@@ -358,6 +399,13 @@ export function MaintenanceDetail({
   const [sheetOpen, setSheetOpen] = useState(false);
   const { copyMessage, setCopyMessage } = useCopyFeedback();
   const handleCopied = (code: string) => setCopyMessage(`Copied: ${code}`);
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [itemId]);
 
   const itemRecords = useMemo(
     () =>
