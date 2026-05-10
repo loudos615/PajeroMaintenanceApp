@@ -443,6 +443,21 @@ dd {
   margin-top: 8px;
 }
 
+.checklist-stack {
+  display: grid;
+  gap: 16px;
+}
+
+.checklist-group {
+  display: grid;
+  gap: 8px;
+}
+
+.checklist-group h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
 .inline-list {
   margin: 0;
   padding: 0;

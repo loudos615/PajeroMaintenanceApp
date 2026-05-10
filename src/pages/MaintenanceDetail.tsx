@@ -1,9 +1,18 @@
-import { AlertTriangle, ArrowLeft, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, CheckCircle2 } from "lucide-react";
 import { type FormEvent, type ReactNode, useEffect, useMemo, useState } from "react";
 import { MarkDoneSheet } from "../components/MarkDoneSheet";
 import { StatusBadge } from "../components/StatusBadge";
 import { navigateTo } from "../hooks/useHashRoute";
-import type { DueInfo, LocalPartsNote, MaintenanceItem, MaintenancePart, ServiceRecord, VehicleProfile } from "../types";
+import type {
+  AftermarketExample,
+  DueInfo,
+  LocalPartsNote,
+  MaintenanceItem,
+  MaintenancePart,
+  ReplacementChecklist,
+  ServiceRecord,
+  VehicleProfile
+} from "../types";
 import { formatDate, formatInterval, formatKm } from "../utils/format";
 
 interface MaintenanceDetailProps {
@@ -24,16 +33,16 @@ interface PartFluidRow {
   oemPartNumber: string | null;
   oemPartName: string | null;
   aftermarketExamples: string[];
-  confidence: string | null;
   note: string | null;
 }
 
 function DetailRow({ label, value }: { label: string; value: ReactNode }) {
   const isEmpty = value === null || value === undefined || value === "";
+  if (isEmpty) return null;
   return (
     <div className="detail-row">
       <dt>{label}</dt>
-      <dd>{isEmpty ? "Not set" : value}</dd>
+      <dd>{value}</dd>
     </div>
   );
 }
@@ -59,47 +68,34 @@ function cleanPartNumber(value: string | null | undefined): string | null {
   return text;
 }
 
-function confidenceLabel(confidence: string | null | undefined): string | null {
-  const value = (confidence ?? "").toLowerCase().replace(/[_-]/g, " ");
-  if (!value || value === "not applicable") return null;
-  if (value.includes("user verified") || value === "verified") return "Verified";
-  if (value.includes("likely")) return "Likely";
-  if (value.includes("to verify") || value.includes("to be added")) return "To be added";
-  if (value.includes("verify")) return "Verify at service";
-  if (value.includes("check")) return "Check before ordering";
-  return "Confirm before ordering";
-}
-
-function verificationLabel(item: MaintenanceItem): string | null {
-  const label = item.verification?.shortLabel?.toLowerCase() ?? "";
-  if (!label || !item.verification?.needed) return null;
-  if (label.includes("user verified")) return "Verified";
-  if (label.includes("read") || label.includes("vehicle")) return "Check on vehicle";
-  if (label.includes("service")) return "Verify at service";
-  if (label.includes("order")) return "Confirm before ordering";
-  return "Check on vehicle";
-}
-
 function isPartObject(part: string | MaintenancePart): part is MaintenancePart {
   return typeof part === "object" && part !== null;
+}
+
+function formatAftermarketExample(example: string | AftermarketExample): string | null {
+  if (typeof example === "string") return textValue(example);
+  return [textValue(example.brand), textValue(example.partNumber)].filter(Boolean).join(" ") || null;
 }
 
 function getPartsAndFluids(item: MaintenanceItem): PartFluidRow[] {
   const rows: PartFluidRow[] = [];
   const fluidSpec = textValue(item.fluid?.specification ?? item.fluidSpec);
   const fluidCapacity = textValue(item.fluid?.capacity ?? null);
-  const serviceFill = textValue(item.fluid?.serviceFill ?? item.fluid?.notes ?? null);
+  const fluidBuyQuantity = textValue(item.fluid?.buyQuantity ?? null);
+  const serviceFill = [item.fluid?.serviceFill, item.fluid?.shelfLabel, item.fluid?.avoid, item.fluid?.notes]
+    .map((value) => textValue(value))
+    .filter(Boolean)
+    .join(" ");
 
-  if (fluidSpec || fluidCapacity || serviceFill) {
+  if (fluidSpec || fluidCapacity || fluidBuyQuantity || serviceFill) {
     rows.push({
       role: "Fluid",
       specification: cleanText(fluidSpec),
       capacity: cleanText(fluidCapacity),
-      buyQuantity: null,
+      buyQuantity: cleanText(fluidBuyQuantity),
       oemPartNumber: null,
       oemPartName: null,
       aftermarketExamples: [],
-      confidence: verificationLabel(item),
       note: cleanText(serviceFill)
     });
   }
@@ -114,7 +110,6 @@ function getPartsAndFluids(item: MaintenanceItem): PartFluidRow[] {
         oemPartNumber: null,
         oemPartName: null,
         aftermarketExamples: [],
-        confidence: null,
         note: null
       });
       continue;
@@ -122,13 +117,14 @@ function getPartsAndFluids(item: MaintenanceItem): PartFluidRow[] {
 
     rows.push({
       role: textValue(part.role) ?? "Part",
-      specification: cleanText(textValue(part.specification)),
+      specification: cleanText(textValue(part.specification ?? part.size)),
       capacity: cleanText(textValue(part.capacity ?? part.quantity)),
       buyQuantity: cleanText(textValue(part.buyQuantity)),
       oemPartNumber: cleanPartNumber(part.oemPartNumber),
       oemPartName: textValue(part.oemPartName),
-      aftermarketExamples: [...(part.aftermarketExamples ?? []), ...(part.alternatives ?? [])].filter(Boolean),
-      confidence: confidenceLabel(part.confidence),
+      aftermarketExamples: [...(part.aftermarketExamples ?? []), ...(part.alternatives ?? [])]
+        .map(formatAftermarketExample)
+        .filter((example): example is string => Boolean(example)),
       note: cleanText(textValue(part.note))
     });
   }
@@ -148,17 +144,8 @@ function getPracticalNotes(item: MaintenanceItem): string[] {
   );
 }
 
-function needsVehicleCheck(item: MaintenanceItem, rows: PartFluidRow[]): boolean {
-  if (item.verificationRequired || item.verification?.needed) return true;
-  return rows.some((row) =>
-    ["Verify at service", "Check before ordering", "Confirm before ordering", "To be added", "Check on vehicle"].includes(
-      row.confidence ?? ""
-    )
-  );
-}
-
 function PartsAndFluids({ rows }: { rows: PartFluidRow[] }) {
-  if (!rows.length) return <p className="empty-state">No parts or fluid details saved for this item yet.</p>;
+  if (!rows.length) return null;
 
   return (
     <div className="parts-grid">
@@ -166,7 +153,6 @@ function PartsAndFluids({ rows }: { rows: PartFluidRow[] }) {
         <article className="part-card" key={`${row.role}-${index}`}>
           <div className="part-card__header">
             <h3>{row.role}</h3>
-            {row.confidence ? <span className="confidence-pill">{row.confidence}</span> : null}
           </div>
           <dl className="detail-grid">
             <DetailRow label="Specification" value={row.specification} />
@@ -182,6 +168,47 @@ function PartsAndFluids({ rows }: { rows: PartFluidRow[] }) {
           </dl>
         </article>
       ))}
+    </div>
+  );
+}
+
+function hasChecklistContent(checklist: ReplacementChecklist | null | undefined): checklist is ReplacementChecklist {
+  return Boolean(
+    checklist &&
+      ((checklist.mainParts?.length ?? 0) > 0 ||
+        (checklist.sealsWashersHardware?.length ?? 0) > 0 ||
+        (checklist.usefulExtras?.length ?? 0) > 0 ||
+        textValue(checklist.notes))
+  );
+}
+
+function ChecklistGroup({ title, items }: { title: string; items?: string[] }) {
+  const cleaned = (items ?? []).map((item) => cleanText(textValue(item))).filter((item): item is string => Boolean(item));
+  if (!cleaned.length) return null;
+  return (
+    <div className="checklist-group">
+      <h3>{title}</h3>
+      <ul className="notes-list">
+        {cleaned.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function ReplacementChecklistView({ checklist }: { checklist: ReplacementChecklist }) {
+  return (
+    <div className="checklist-stack">
+      <ChecklistGroup title="Main parts" items={checklist.mainParts} />
+      <ChecklistGroup title="Seals / washers / hardware" items={checklist.sealsWashersHardware} />
+      <ChecklistGroup title="Useful extras" items={checklist.usefulExtras} />
+      {textValue(checklist.notes) ? (
+        <div className="checklist-group">
+          <h3>Notes</h3>
+          <p className="muted">{cleanText(textValue(checklist.notes))}</p>
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -305,7 +332,7 @@ export function MaintenanceDetail({
   const itemParts = getPartsAndFluids(item);
   const practicalNotes = getPracticalNotes(item);
   const latestRecord = itemRecords[0];
-  const showVehicleCheck = needsVehicleCheck(item, itemParts);
+  const replacementChecklist = hasChecklistContent(item.replacementChecklist) ? item.replacementChecklist : null;
 
   return (
     <main className="page">
@@ -325,16 +352,6 @@ export function MaintenanceDetail({
           Mark as done
         </button>
       </section>
-
-      {showVehicleCheck ? (
-        <div className="warning-band">
-          <AlertTriangle aria-hidden="true" />
-          <div>
-            <strong>Check on vehicle</strong>
-            <p>Confirm this value on the vehicle or during the first service before ordering parts.</p>
-          </div>
-        </div>
-      ) : null}
 
       <section className="section-block detail-card">
         <h2>Status</h2>
@@ -367,10 +384,19 @@ export function MaintenanceDetail({
         </dl>
       </section>
 
-      <section className="section-block detail-card">
-        <h2>Parts and fluids</h2>
-        <PartsAndFluids rows={itemParts} />
-      </section>
+      {itemParts.length ? (
+        <section className="section-block detail-card">
+          <h2>Parts and fluids</h2>
+          <PartsAndFluids rows={itemParts} />
+        </section>
+      ) : null}
+
+      {replacementChecklist ? (
+        <section className="section-block detail-card">
+          <h2>Replacement parts checklist</h2>
+          <ReplacementChecklistView checklist={replacementChecklist} />
+        </section>
+      ) : null}
 
       <section className="section-block detail-card">
         <h2>Notes</h2>

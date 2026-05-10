@@ -1,6 +1,7 @@
 import { Download, RotateCcw, Upload } from "lucide-react";
 import { type ChangeEvent, useMemo, useState } from "react";
 import { APP_VERSION } from "../app/version";
+import { maintenanceVehicleProfile } from "../data/maintenanceItems";
 import { exportUserData, importUserData } from "../db/indexedDb";
 import { checkForUpdateAndReload } from "../services/appUpdate";
 import type { AppExport, OdometerReading, VehicleProfile } from "../types";
@@ -34,6 +35,11 @@ function Detail({ label, value }: { label: string; value: string }) {
       <dd>{value}</dd>
     </div>
   );
+}
+
+function transmissionLabel(value: string | undefined): string {
+  if (!value) return "Automatic V5A51";
+  return value.toLowerCase().includes("automatic") ? value.replace(/^v5a51/i, "V5A51") : `Automatic ${value}`;
 }
 
 export function Settings({ profile, odometerReadings, onImportComplete, onReset }: SettingsProps) {
@@ -113,20 +119,15 @@ export function Settings({ profile, odometerReadings, onImportComplete, onReset 
           <Detail label="Vehicle" value="Mitsubishi Pajero III" />
           <Detail label="Market name" value="Pajero / Montero / Shogun" />
           <Detail label="Generation" value="Gen 3" />
-          <Detail label="Year" value="2001" />
-          <Detail label="Body" value="5-door long wheelbase" />
-          <Detail label="Model code" value={profile.modelCode} />
-          <Detail label="Engine" value={profile.engine} />
+          <Detail label="Year" value={String(maintenanceVehicleProfile.year ?? 2001)} />
+          <Detail label="Body" value={maintenanceVehicleProfile.body ?? "5-door long wheelbase"} />
+          <Detail label="Model code" value={maintenanceVehicleProfile.modelCode ?? profile.modelCode} />
+          <Detail label="Engine" value={maintenanceVehicleProfile.engine ?? profile.engine} />
           <Detail label="Fuel" value="Diesel" />
-          <Detail label="Transmission" value="Automatic V5A51" />
+          <Detail label="Transmission" value={transmissionLabel(maintenanceVehicleProfile.transmission)} />
           <Detail label="Drive" value="4WD / Super Select" />
-          <Detail label="Power" value="121 kW" />
+          <Detail label="Power" value={`${maintenanceVehicleProfile.powerKw ?? 121} kW`} />
           <Detail label="VIN" value={profile.vin} />
-          <Detail label="Purchase date" value={formatDate(profile.purchaseDate)} />
-          <Detail label="Purchase odometer" value={formatKm(profile.purchaseOdometerKm)} />
-          <Detail label="Rear differential service fill" value="1.6 L verified on this vehicle" />
-          <Detail label="Rear wiper blade" value="400 mm verified on this vehicle" />
-          <Detail label="Battery setup" value="likely 2×95 Ah" />
         </dl>
       </section>
 

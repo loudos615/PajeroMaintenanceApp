@@ -38,6 +38,12 @@ function isHbbDiagnosticItem(item: MaintenanceItem): boolean {
   return text.includes("hbb") || text.includes("hydraulic brake booster");
 }
 
+function isRegularDueListItem(item: MaintenanceItem): boolean {
+  if (item.showInRegularDueList === false) return false;
+  if (item.diagnosticOnly && isHbbDiagnosticItem(item)) return false;
+  return true;
+}
+
 export function calculateDueInfo(
   item: MaintenanceItem,
   profile: VehicleProfile,
@@ -147,5 +153,5 @@ export function calculateAllDue(
   records: ServiceRecord[],
   today = new Date()
 ): DueInfo[] {
-  return items.map((item) => calculateDueInfo(item, profile, records, today));
+  return items.filter(isRegularDueListItem).map((item) => calculateDueInfo(item, profile, records, today));
 }

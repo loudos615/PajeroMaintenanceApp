@@ -19,19 +19,30 @@ export interface MaintenanceFluid {
   specification?: string | null;
   capacity?: string | null;
   serviceFill?: string | null;
+  buyQuantity?: string | null;
+  shelfLabel?: string | null;
+  avoid?: string | null;
   notes?: string | null;
+}
+
+export interface AftermarketExample {
+  brand?: string | null;
+  partNumber?: string | null;
+  confidence?: string | null;
+  note?: string | null;
 }
 
 export interface MaintenancePart {
   role?: string | null;
   specification?: string | null;
+  size?: string | null;
   capacity?: string | null;
   quantity?: string | null;
   buyQuantity?: string | null;
   oemPartNumber?: string | null;
   oemPartName?: string | null;
   alternatives?: string[] | null;
-  aftermarketExamples?: string[] | null;
+  aftermarketExamples?: Array<string | AftermarketExample> | null;
   confidence?: string | null;
   note?: string | null;
 }
@@ -40,6 +51,30 @@ export interface MaintenanceVerification {
   needed?: boolean;
   shortLabel?: string | null;
   reason?: string | null;
+}
+
+export interface ReplacementChecklist {
+  mainParts?: string[];
+  sealsWashersHardware?: string[];
+  usefulExtras?: string[];
+  notes?: string | null;
+}
+
+export interface MaintenanceVehicleProfile {
+  displayName?: string;
+  vehicle?: string;
+  year?: number;
+  body?: string;
+  modelCode?: string;
+  modelVariant?: string;
+  engine?: string;
+  powerKw?: number;
+  transmission?: string;
+  drive?: string;
+  market?: string;
+  vin?: string;
+  purchaseDate?: string;
+  purchaseOdometerKm?: number;
 }
 
 export interface VehicleProfile {
@@ -73,10 +108,12 @@ export interface MaintenanceItem {
   baselineDue?: boolean;
   conditionBased: boolean;
   diagnosticOnly?: boolean;
+  showInRegularDueList?: boolean;
   verificationRequired: boolean;
   verification?: MaintenanceVerification | null;
   parts: Array<string | MaintenancePart> | null;
   fluid?: MaintenanceFluid | null;
+  replacementChecklist?: ReplacementChecklist | null;
   fluidSpec: string | null;
   symptomsIfNeglected: string | null;
   notes: string | null;

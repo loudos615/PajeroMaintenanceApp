@@ -16,10 +16,10 @@ This is a private local tracker, not a generic vehicle maintenance service. It h
 The active seed maintenance database is stored at:
 
 ```text
-src/data/maintenance_items_v10.json
+src/data/maintenance_items_v17_parts_checklist.json
 ```
 
-The app uses this local JSON for recommended intervals, official interval references, parts, fluids, capacities, and practical service notes.
+The app uses this local JSON for vehicle identity data, recommended intervals, official interval references, parts, fluids, capacities, replacement checklists, and practical service notes.
 
 ## Run Locally
 

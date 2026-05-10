@@ -29,7 +29,9 @@ export default defineConfig({
         runtimeCaching: [
           {
             urlPattern: ({ url }) =>
-              url.pathname.endsWith("/maintenance_items.json") || url.pathname.endsWith("/maintenance_items_v10.json"),
+              url.pathname.endsWith("/maintenance_items.json") ||
+              url.pathname.endsWith("/maintenance_items_v10.json") ||
+              url.pathname.endsWith("/maintenance_items_v17_parts_checklist.json"),
             handler: "CacheFirst",
             options: {
               cacheName: "pajero-maintenance-seed",

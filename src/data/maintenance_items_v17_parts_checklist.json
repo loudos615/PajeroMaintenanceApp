@@ -1,0 +1,2750 @@
+{
+  "schemaVersion": "v17-parts-checklist",
+  "databaseName": "Pajero V78W 4M41 maintenance database - shelf specs + replacement parts checklist",
+  "language": "en",
+  "vehicleProfile": {
+    "displayName": "Mitsubishi Pajero",
+    "vehicle": "Mitsubishi Pajero III / Montero / Shogun Gen 3",
+    "year": 2001,
+    "body": "5-door long wheelbase",
+    "modelCode": "V78W",
+    "modelVariant": "V78WLYXFL6",
+    "engine": "4M41 3.2 Di-D",
+    "powerKw": 121,
+    "transmission": "V5A51 automatic",
+    "drive": "Super Select 4WD",
+    "market": "Europe LHD",
+    "vin": "JMBLYV78W1J007732",
+    "purchaseDate": "2026-04-22",
+    "purchaseOdometerKm": 287000
+  },
+  "maintenanceItems": [
+    {
+      "id": "engine_engine_oil_replace",
+      "originalItemNumber": 1,
+      "system": "Engine",
+      "name": "Engine oil",
+      "action": "Replace",
+      "officialIntervalKm": 20000,
+      "officialIntervalMonths": 12,
+      "recommendedIntervalKm": 10000,
+      "recommendedIntervalMonths": 12,
+      "priority": "Critical",
+      "difficulty": "Easy DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Sooted oil, timing-chain wear, turbo wear, low pressure",
+      "fluid": {
+        "specification": "5W-40 diesel engine oil, ACEA B4 (or ACEA B3/B4) and API CF/CF-4 or higher. Practical Europe shelf choice: 5W-40 fully/semi-synthetic diesel oil meeting ACEA B4.",
+        "capacity": "Approx. 9.8 L total including filter and oil cooler.",
+        "serviceFill": "Buy 10 L. Fill gradually and set final level by dipstick after warm-up and drain-back.",
+        "buyQuantity": "10 L",
+        "shelfLabel": "5W-40 diesel oil, ACEA B4 / API CF or higher",
+        "avoid": "Do not buy petrol-only oil, low-SAPS DPF-only oil without ACEA B4 suitability, or oil that does not list a diesel API/ACEA rating."
+      },
+      "parts": [
+        {
+          "role": "Drain plug washer",
+          "oemPartNumber": "MD050317",
+          "confidence": "likely"
+        },
+        {
+          "role": "Oil filter",
+          "confidence": "likely",
+          "oemPartNumber": "ME013307",
+          "oemPartName": "OIL FILTER",
+          "note": "Use together with oil; alternatives in separate oil-filter item."
+        },
+        {
+          "role": "Drain plug",
+          "confidence": "likely",
+          "oemPartNumber": "MD050316",
+          "oemPartName": "ENGINE OIL DRAIN PLUG",
+          "note": "Replace only if damaged/rounded; normally washer only is enough."
+        }
+      ],
+      "appNotes": [
+        "Recommended app interval: 10,000 km / 12 months. Official interval kept separately."
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true,
+        "primaryNote": "Recommended reminder: 10,000 km / 12 months."
+      },
+      "replacementChecklist": {
+        "mainParts": [
+          "10 L 5W-40 diesel oil, ACEA B4 / API CF or higher",
+          "Oil filter ME013307"
+        ],
+        "sealsWashersHardware": [
+          "Drain plug washer MD050317",
+          "Optional drain plug MD050316 if damaged"
+        ],
+        "usefulExtras": [
+          "Oil catch pan",
+          "Gloves/rags",
+          "Brake cleaner for cleanup"
+        ],
+        "notes": "Normal oil service kit: oil + filter + washer. Drain plug itself is not normally replaced unless damaged."
+      }
+    },
+    {
+      "id": "engine_oil_filter_replace",
+      "originalItemNumber": 2,
+      "system": "Engine",
+      "name": "Oil filter",
+      "action": "Replace",
+      "officialIntervalKm": 20000,
+      "officialIntervalMonths": 12,
+      "recommendedIntervalKm": 10000,
+      "recommendedIntervalMonths": 12,
+      "priority": "Critical",
+      "difficulty": "Easy DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Dirty oil, delayed pressure, increased wear",
+      "parts": [
+        {
+          "role": "Oil filter",
+          "oemPartNumber": "ME013307",
+          "oemPartName": "OIL FILTER",
+          "confidence": "likely",
+          "alternatives": [
+            "MD352626",
+            "MZ690150",
+            "Blue Print ADS72101",
+            "Bosch 0451103316"
+          ]
+        }
+      ],
+      "appNotes": [
+        "Replace together with engine oil.",
+        "Change with every engine oil service."
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true,
+        "primaryNote": "Replace together with engine oil."
+      },
+      "fluid": null,
+      "replacementChecklist": {
+        "mainParts": [
+          "Oil filter ME013307"
+        ],
+        "sealsWashersHardware": [],
+        "usefulExtras": [
+          "Replace together with engine oil and drain washer"
+        ],
+        "notes": "Alternatives remain in parts list; confirm against removed filter once."
+      }
+    },
+    {
+      "id": "engine_air_cleaner_element_inspect",
+      "originalItemNumber": 3,
+      "system": "Engine",
+      "name": "Air cleaner element",
+      "action": "Inspect",
+      "officialIntervalKm": 20000,
+      "officialIntervalMonths": 12,
+      "recommendedIntervalKm": 10000,
+      "recommendedIntervalMonths": 6,
+      "priority": "High",
+      "difficulty": "Easy DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Smoke, poor power, higher fuel use, turbo dusting risk",
+      "parts": [
+        {
+          "role": "Air filter element",
+          "oemPartNumber": "MR404847",
+          "oemPartName": "ELEMENT, AIR CLEANER",
+          "confidence": "verified"
+        }
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "fluid": null
+    },
+    {
+      "id": "engine_air_cleaner_element_replace",
+      "originalItemNumber": 4,
+      "system": "Engine",
+      "name": "Air cleaner element",
+      "action": "Replace",
+      "officialIntervalKm": 40000,
+      "officialIntervalMonths": 24,
+      "recommendedIntervalKm": 20000,
+      "recommendedIntervalMonths": 12,
+      "priority": "High",
+      "difficulty": "Easy DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Restricted airflow, smoke, turbo contamination",
+      "parts": [
+        {
+          "role": "Air filter element",
+          "oemPartNumber": "MR404847",
+          "oemPartName": "ELEMENT, AIR CLEANER",
+          "confidence": "verified"
+        }
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "fluid": null,
+      "replacementChecklist": {
+        "mainParts": [
+          "Air filter element MR404847"
+        ],
+        "sealsWashersHardware": [],
+        "usefulExtras": [],
+        "notes": "No extra hardware normally needed."
+      }
+    },
+    {
+      "id": "engine_fuel_filter_replace",
+      "originalItemNumber": 5,
+      "system": "Engine",
+      "name": "Fuel filter",
+      "action": "Replace",
+      "officialIntervalKm": 40000,
+      "officialIntervalMonths": 24,
+      "recommendedIntervalKm": 20000,
+      "recommendedIntervalMonths": 12,
+      "priority": "Critical",
+      "difficulty": "Medium DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Hard start, surging, rail-pressure faults, pump wear",
+      "parts": [
+        {
+          "role": "Fuel filter element",
+          "oemPartNumber": "ME132525",
+          "oemPartName": "ELEMENT KIT, FUEL FILTER",
+          "confidence": "verified",
+          "alternatives": [
+            "SFF2526",
+            "FC332",
+            "YFC332"
+          ]
+        },
+        {
+          "role": "Fuel filter body",
+          "oemPartNumber": "MR450555",
+          "confidence": "verified"
+        },
+        {
+          "role": "Water sensor",
+          "oemPartNumber": "MR514545",
+          "confidence": "verified"
+        }
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "fluid": null,
+      "replacementChecklist": {
+        "mainParts": [
+          "Fuel filter element kit ME132525"
+        ],
+        "sealsWashersHardware": [
+          "Use seals supplied with filter kit if included"
+        ],
+        "usefulExtras": [
+          "Diesel-safe container",
+          "Prime/bleed after replacement"
+        ],
+        "notes": "Fuel filter body MR450555 and water sensor MR514545 are not normal replacement items unless damaged/faulty."
+      }
+    },
+    {
+      "id": "engine_fuel_filter_water_contamination_inspect",
+      "originalItemNumber": 6,
+      "system": "Engine",
+      "name": "Fuel-filter water / contamination",
+      "action": "Inspect",
+      "recommendedIntervalKm": 5000,
+      "recommendedIntervalMonths": 6,
+      "priority": "High",
+      "difficulty": "Easy DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Filter lamp, hesitation, corrosion in injection parts",
+      "parts": [
+        {
+          "role": "Fuel filter water sensor",
+          "oemPartNumber": "MR514545",
+          "confidence": "verified"
+        },
+        {
+          "role": "Fuel filter body",
+          "oemPartNumber": "MR450555",
+          "confidence": "verified"
+        }
+      ],
+      "appNotes": [
+        "Inspect/drain immediately if warning appears."
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "fluid": null
+    },
+    {
+      "id": "engine_coolant_level_and_cooling_system_inspect",
+      "originalItemNumber": 7,
+      "system": "Engine",
+      "name": "Coolant level and cooling system",
+      "action": "Inspect",
+      "officialIntervalKm": 20000,
+      "officialIntervalMonths": 12,
+      "recommendedIntervalKm": 10000,
+      "recommendedIntervalMonths": 12,
+      "priority": "Critical",
+      "difficulty": "Easy DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Overheating, heater weakness, hidden coolant loss",
+      "fluid": {
+        "specification": "Long-life ethylene-glycol coolant for aluminium engines. Shelf choice: Asian vehicle / P-OAT or OAT/HOAT Long Life coolant, premix 50/50 or concentrate mixed with demineralised water. Mitsubishi DIA QUEEN Long-Life Coolant 0103044 equivalent.",
+        "serviceFill": "Inspection only: check level, colour, smell, leaks and rear heater pipe condition.",
+        "shelfLabel": "Asian/P-OAT or OAT/HOAT Long Life coolant for aluminium engines, 50/50 premix",
+        "avoid": "Do not top up unknown coolant with random G11/G12 just by colour. If switching to G12+/G12++/OAT, do a full flush first."
+      },
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": [],
+      "appNotes": []
+    },
+    {
+      "id": "engine_coolant_flush",
+      "originalItemNumber": 8,
+      "system": "Engine",
+      "name": "Coolant",
+      "action": "Flush",
+      "officialIntervalKm": 60000,
+      "officialIntervalMonths": 48,
+      "recommendedIntervalKm": 40000,
+      "recommendedIntervalMonths": 36,
+      "priority": "Critical",
+      "difficulty": "Medium DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Corrosion, overheating, water-pump wear",
+      "fluid": {
+        "specification": "Long-life ethylene-glycol coolant for aluminium engines. Shelf choice: Asian vehicle / P-OAT or OAT/HOAT Long Life coolant, premix 50/50 or concentrate mixed with demineralised water. Mitsubishi DIA QUEEN Long-Life Coolant 0103044 equivalent.",
+        "capacity": "Approx. 9.0–10.0 L depending on rear heater / cooling circuit.",
+        "serviceFill": "Flush if coolant type is unknown. Refill with one coolant type, bleed fully and record measured refill amount.",
+        "buyQuantity": "10–12 L premix, or equivalent concentrate + demineralised water",
+        "notes": "Do not label this as VW G12 in the app. If an aftermarket G12/G12+ product is used, use only after a full flush and compatibility check.",
+        "shelfLabel": "Asian/P-OAT or OAT/HOAT Long Life coolant for aluminium engines, 50/50 premix",
+        "avoid": "Do not top up unknown coolant with random G11/G12 just by colour. If switching to G12+/G12++/OAT, do a full flush first."
+      },
+      "parts": [
+        {
+          "role": "Thermostat",
+          "oemPartNumber": "ME191593",
+          "confidence": "likely"
+        },
+        {
+          "role": "Radiator cap",
+          "oemPartNumber": "MR481218",
+          "confidence": "likely"
+        }
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "replacementChecklist": {
+        "mainParts": [
+          "10–12 L long-life coolant premix or equivalent concentrate + demineralised water"
+        ],
+        "sealsWashersHardware": [
+          "Thermostat ME191593 if replacing thermostat",
+          "Radiator cap MR481218 if weak/old"
+        ],
+        "usefulExtras": [
+          "Hose clamps as needed",
+          "Bleed funnel"
+        ],
+        "notes": "Hoses are inspection/condition items unless cracked, swollen or leaking."
+      }
+    },
+    {
+      "id": "engine_thermostat_radiator_main_hoses_inspect",
+      "originalItemNumber": 9,
+      "system": "Engine",
+      "name": "Thermostat / radiator / main hoses",
+      "action": "Inspect",
+      "recommendedIntervalKm": 40000,
+      "recommendedIntervalMonths": 24,
+      "priority": "High",
+      "difficulty": "Medium DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Slow warm-up, unstable temp, overheating, coolant smell",
+      "parts": [
+        {
+          "role": "Thermostat",
+          "oemPartNumber": "ME191593",
+          "confidence": "likely"
+        },
+        {
+          "role": "Radiator cap",
+          "oemPartNumber": "MR481218",
+          "confidence": "likely"
+        },
+        {
+          "role": "Upper radiator hose",
+          "oemPartNumber": "MR404865",
+          "confidence": "likely"
+        },
+        {
+          "role": "Lower radiator hose",
+          "oemPartNumber": "MR404872",
+          "confidence": "likely"
+        }
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "fluid": null,
+      "replacementChecklist": {
+        "mainParts": [
+          "Thermostat ME191593 if faulty",
+          "Radiator cap MR481218 if weak/old",
+          "Upper radiator hose MR404865 if damaged",
+          "Lower radiator hose MR404872 if damaged"
+        ],
+        "sealsWashersHardware": [],
+        "usefulExtras": [
+          "Correct coolant for top-up after hose work",
+          "Hose clamps"
+        ],
+        "notes": "Do not buy hoses until routing is matched on the vehicle."
+      }
+    },
+    {
+      "id": "engine_accessory_belts_inspect_adjust",
+      "originalItemNumber": 10,
+      "system": "Engine",
+      "name": "Accessory belts",
+      "action": "Inspect / Adjust",
+      "officialIntervalKm": 20000,
+      "officialIntervalMonths": 12,
+      "recommendedIntervalKm": 10000,
+      "recommendedIntervalMonths": 12,
+      "priority": "High",
+      "difficulty": "Medium DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Squeal, no charging, poor cooling",
+      "parts": [
+        {
+          "role": "Alternator and others belt",
+          "oemPartNumber": "MH014065",
+          "oemPartName": "BELT, ALTERNATOR & OTHERS",
+          "confidence": "likely"
+        }
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "fluid": null
+    },
+    {
+      "id": "engine_accessory_belts_replace",
+      "originalItemNumber": 11,
+      "system": "Engine",
+      "name": "Accessory belts",
+      "action": "Replace",
+      "recommendedIntervalKm": 60000,
+      "recommendedIntervalMonths": 48,
+      "priority": "High",
+      "difficulty": "Medium DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Belt breakage, charging loss, overheating",
+      "parts": [
+        {
+          "role": "Alternator and others belt",
+          "oemPartNumber": "MH014065",
+          "oemPartName": "BELT, ALTERNATOR & OTHERS",
+          "confidence": "likely"
+        },
+        {
+          "role": "A/C compressor belt",
+          "confidence": "likely",
+          "note": "Shelf spec candidate: 13 x 915 mm V-belt; verify installed belt before buying.",
+          "size": "13 x 915 mm likely"
+        }
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "fluid": null,
+      "replacementChecklist": {
+        "mainParts": [
+          "Alternator/accessory belt MH014065",
+          "A/C belt 13 x 915 mm likely, measure old belt first"
+        ],
+        "sealsWashersHardware": [],
+        "usefulExtras": [
+          "Inspect pulleys/idlers while belts are off"
+        ],
+        "notes": "Only MH014065 is a strong OEM candidate here; A/C belt is listed as shelf-size candidate, not VIN-exact OEM."
+      }
+    },
+    {
+      "id": "engine_belt_pulleys_idlers_tensioners_inspect",
+      "originalItemNumber": 12,
+      "system": "Engine",
+      "name": "Belt pulleys / idlers / tensioners",
+      "action": "Inspect",
+      "recommendedIntervalKm": 20000,
+      "recommendedIntervalMonths": 12,
+      "priority": "High",
+      "difficulty": "Medium DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Chirp, rough bearing noise, belt throw",
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": [],
+      "fluid": null
+    },
+    {
+      "id": "engine_vacuum_pump_oil_hose_inspect",
+      "originalItemNumber": 13,
+      "system": "Engine",
+      "name": "Vacuum-pump oil hose",
+      "action": "Inspect",
+      "officialIntervalKm": 20000,
+      "officialIntervalMonths": 12,
+      "recommendedIntervalKm": 10000,
+      "recommendedIntervalMonths": 12,
+      "priority": "High",
+      "difficulty": "Medium DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Oil seepage, vacuum-related issues",
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": [],
+      "fluid": null
+    },
+    {
+      "id": "engine_intake_air_hose_turbo_oil_hose_intercooler_path_inspect",
+      "originalItemNumber": 14,
+      "system": "Engine",
+      "name": "Intake air hose / turbo oil hose / intercooler path",
+      "action": "Inspect",
+      "officialIntervalKm": 40000,
+      "officialIntervalMonths": 24,
+      "recommendedIntervalKm": 20000,
+      "recommendedIntervalMonths": 12,
+      "priority": "High",
+      "difficulty": "Easy DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Boost leaks, oily misting, poor power",
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": [],
+      "fluid": null
+    },
+    {
+      "id": "engine_turbocharger_inspect",
+      "originalItemNumber": 15,
+      "system": "Engine",
+      "name": "Turbocharger",
+      "action": "Inspect",
+      "recommendedIntervalKm": 20000,
+      "recommendedIntervalMonths": 12,
+      "priority": "Critical",
+      "difficulty": "Workshop",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Whine, smoke, power loss, oil use",
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": [],
+      "fluid": null
+    },
+    {
+      "id": "engine_crankcase_ventilation_breather_hoses_clean_inspect",
+      "originalItemNumber": 16,
+      "system": "Engine",
+      "name": "Crankcase ventilation / breather hoses",
+      "action": "Clean / Inspect",
+      "recommendedIntervalKm": 20000,
+      "recommendedIntervalMonths": 12,
+      "priority": "Medium",
+      "difficulty": "Easy DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Oil mist, manifold sludge, external seepage",
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": [],
+      "fluid": null
+    },
+    {
+      "id": "engine_egr_system_inspect_clean",
+      "originalItemNumber": 17,
+      "system": "Engine",
+      "name": "EGR system",
+      "action": "Inspect / Clean",
+      "officialIntervalKm": 20000,
+      "officialIntervalMonths": 12,
+      "recommendedIntervalKm": 40000,
+      "recommendedIntervalMonths": 24,
+      "priority": "High",
+      "difficulty": "Medium DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Low-speed hesitation, smoke, sticky intake parts",
+      "parts": [
+        {
+          "role": "Inlet manifold gasket",
+          "oemPartNumber": "ME203212",
+          "confidence": "likely"
+        }
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "fluid": null,
+      "replacementChecklist": {
+        "mainParts": [
+          "Intake/EGR cleaner"
+        ],
+        "sealsWashersHardware": [
+          "Inlet manifold gasket ME203212 if manifold removed"
+        ],
+        "usefulExtras": [
+          "Throttle/EGR-safe brushes",
+          "Rags"
+        ],
+        "notes": "Do not buy manifold gaskets unless cleaning requires manifold removal."
+      }
+    },
+    {
+      "id": "engine_intake_manifold_carbon_buildup_clean",
+      "originalItemNumber": 18,
+      "system": "Engine",
+      "name": "Intake manifold carbon buildup",
+      "action": "Clean",
+      "recommendedIntervalKm": 80000,
+      "recommendedIntervalMonths": 48,
+      "priority": "High",
+      "difficulty": "Advanced DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Power loss, smoke, airflow restriction",
+      "parts": [
+        {
+          "role": "Inlet manifold gasket",
+          "oemPartNumber": "ME203212",
+          "confidence": "likely"
+        }
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "fluid": null,
+      "replacementChecklist": {
+        "mainParts": [
+          "Intake cleaner supplies"
+        ],
+        "sealsWashersHardware": [
+          "Inlet manifold gasket ME203212 if manifold removed"
+        ],
+        "usefulExtras": [
+          "Brushes/scrapers/rags"
+        ],
+        "notes": "Cleaning supplies are generic, gasket only if removed."
+      }
+    },
+    {
+      "id": "engine_glow_plugs_test_replace_on_condition",
+      "originalItemNumber": 19,
+      "system": "Engine",
+      "name": "Glow plugs",
+      "action": "Test / Replace on condition",
+      "recommendedIntervalKm": 100000,
+      "recommendedIntervalMonths": 60,
+      "priority": "Medium",
+      "difficulty": "Medium DIY",
+      "baselineDue": true,
+      "conditionBased": true,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Hard cold start, white smoke, cold misfire",
+      "parts": [
+        {
+          "role": "Glow plug",
+          "oemPartNumber": "ME203539",
+          "confidence": "likely",
+          "alternatives": [
+            "ME201638",
+            "CP05 cross-reference"
+          ]
+        },
+        {
+          "role": "Glow plug relay",
+          "oemPartNumber": "MD342751",
+          "confidence": "likely"
+        }
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "fluid": null,
+      "replacementChecklist": {
+        "mainParts": [
+          "Glow plugs ME203539"
+        ],
+        "sealsWashersHardware": [],
+        "usefulExtras": [
+          "Penetrating oil",
+          "Torque wrench"
+        ],
+        "notes": "Replace as a set if testing shows multiple weak plugs; confirm plug marking on first removal."
+      }
+    },
+    {
+      "id": "engine_injectors_small_injection_quantity_learning_test",
+      "originalItemNumber": 20,
+      "system": "Engine",
+      "name": "Injectors / small injection quantity learning",
+      "action": "Test",
+      "officialIntervalKm": 20000,
+      "officialIntervalMonths": 12,
+      "recommendedIntervalKm": 20000,
+      "recommendedIntervalMonths": 12,
+      "priority": "High",
+      "difficulty": "Workshop",
+      "baselineDue": false,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Rough idle, smoke, knock, economy loss",
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": [],
+      "fluid": null
+    },
+    {
+      "id": "engine_supply_pump_scv_rail_pressure_system_diagnose",
+      "originalItemNumber": 21,
+      "system": "Engine",
+      "name": "Supply pump / SCV / rail-pressure system",
+      "action": "Diagnose",
+      "recommendedIntervalKm": 40000,
+      "recommendedIntervalMonths": 24,
+      "priority": "High",
+      "difficulty": "Workshop",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Surging, stalling, hard starting, reduced power",
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": [],
+      "fluid": null
+    },
+    {
+      "id": "engine_valve_clearance_adjust",
+      "originalItemNumber": 22,
+      "system": "Engine",
+      "name": "Valve clearance",
+      "action": "Adjust",
+      "officialIntervalKm": 20000,
+      "officialIntervalMonths": 12,
+      "recommendedIntervalKm": 20000,
+      "recommendedIntervalMonths": 12,
+      "priority": "High",
+      "difficulty": "Workshop",
+      "baselineDue": false,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Ticking, rough idle, starting trouble",
+      "parts": [
+        {
+          "role": "Valve cover gasket",
+          "oemPartNumber": "ME192209 / ME203686",
+          "confidence": "likely"
+        }
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "fluid": null,
+      "replacementChecklist": {
+        "mainParts": [
+          "Valve cover gasket ME192209 / ME203686 if cover is removed"
+        ],
+        "sealsWashersHardware": [],
+        "usefulExtras": [
+          "Feeler gauges",
+          "Sealant only where manual requires"
+        ],
+        "notes": "Record measured valve clearances."
+      }
+    },
+    {
+      "id": "engine_timing_chain_guides_tensioner_inspect_diagnose",
+      "originalItemNumber": 23,
+      "system": "Engine",
+      "name": "Timing chain / guides / tensioner",
+      "action": "Inspect / Diagnose",
+      "recommendedIntervalKm": 100000,
+      "recommendedIntervalMonths": 60,
+      "priority": "Critical",
+      "difficulty": "Workshop",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Cold-start rattle, metallic timing noise, catastrophic failure if ignored",
+      "parts": [
+        {
+          "role": "Timing chain kit",
+          "oemPartNumber": "ME190552",
+          "confidence": "likely",
+          "note": "Official 4M41 bulletin kit candidate; diagnose before replacement."
+        },
+        {
+          "role": "Upper timing chain guide",
+          "oemPartNumber": "1140A026",
+          "confidence": "likely"
+        }
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "fluid": null,
+      "replacementChecklist": {
+        "mainParts": [
+          "Timing chain kit ME190552 if diagnosis confirms replacement",
+          "Upper timing chain guide 1140A026"
+        ],
+        "sealsWashersHardware": [],
+        "usefulExtras": [
+          "Associated gaskets/seals according to repair procedure"
+        ],
+        "notes": "Diagnostic item, not normal interval replacement."
+      }
+    },
+    {
+      "id": "engine_engine_mounts_oil_pressure_switch_leak_general_4m41_high_mileag",
+      "originalItemNumber": 24,
+      "system": "Engine",
+      "name": "Engine mounts / oil-pressure-switch leak / general 4M41 high-mileage checks",
+      "action": "Inspect",
+      "recommendedIntervalKm": 20000,
+      "recommendedIntervalMonths": 12,
+      "priority": "High",
+      "difficulty": "Workshop",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Vibration, sudden oil leak near turbo/block, clunks",
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": [],
+      "fluid": null
+    },
+    {
+      "id": "automatic_transmission_atf_level_and_condition_inspect",
+      "originalItemNumber": 25,
+      "system": "Automatic transmission",
+      "name": "ATF level and condition",
+      "action": "Inspect",
+      "officialIntervalKm": 20000,
+      "officialIntervalMonths": 12,
+      "recommendedIntervalKm": 10000,
+      "recommendedIntervalMonths": 12,
+      "priority": "High",
+      "difficulty": "Medium DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Burnt smell, slip, flare, delayed engagement",
+      "fluid": {
+        "specification": "ATF SP-III. Shelf label must explicitly say Mitsubishi SP-III / DiaQueen SP-III / Diamond SP-III compatible.",
+        "capacity": "Approx. 9.7 L total system capacity.",
+        "serviceFill": "Inspection only: check hot level, colour and smell.",
+        "shelfLabel": "ATF SP-III / Mitsubishi SP-III compatible",
+        "avoid": "Do not use generic Dexron/Mercon unless the bottle explicitly states Mitsubishi SP-III compatibility."
+      },
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": []
+    },
+    {
+      "id": "automatic_transmission_atf_replace",
+      "originalItemNumber": 26,
+      "system": "Automatic transmission",
+      "name": "ATF",
+      "action": "Replace",
+      "officialIntervalKm": 80000,
+      "recommendedIntervalKm": 40000,
+      "recommendedIntervalMonths": 36,
+      "priority": "Critical",
+      "difficulty": "Workshop",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Harsh or soft shifts, shudder, temp warning",
+      "fluid": {
+        "specification": "ATF SP-III. Shelf label must explicitly say Mitsubishi SP-III / DiaQueen SP-III / Diamond SP-III compatible.",
+        "capacity": "Approx. 9.7 L total system capacity.",
+        "serviceFill": "Drain/pan service refill is lower than total capacity. Measure drained amount and refill accordingly.",
+        "buyQuantity": "10–12 L for staged service",
+        "shelfLabel": "ATF SP-III / Mitsubishi SP-III compatible",
+        "avoid": "Do not use generic Dexron/Mercon unless the bottle explicitly states Mitsubishi SP-III compatibility."
+      },
+      "parts": [
+        {
+          "role": "A/T drain plug gasket",
+          "oemPartNumber": "MD050317",
+          "confidence": "verified",
+          "note": "A/T oil pan drain plug gasket."
+        }
+      ],
+      "appNotes": [
+        "Use 40,000 km / 24–36 months as conservative app interval."
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "replacementChecklist": {
+        "mainParts": [
+          "ATF SP-III, 10–12 L depending on service method"
+        ],
+        "sealsWashersHardware": [
+          "A/T drain plug gasket MD050317"
+        ],
+        "usefulExtras": [
+          "Large measuring jug",
+          "Hose for cooler-line staged exchange"
+        ],
+        "notes": "Measure drained amount; total capacity differs from normal drain amount."
+      }
+    },
+    {
+      "id": "automatic_transmission_internal_filter_strainer_pan_service_replace_cl",
+      "originalItemNumber": 27,
+      "system": "Automatic transmission",
+      "name": "Internal filter / strainer / pan service",
+      "action": "Replace / Clean",
+      "recommendedIntervalKm": 80000,
+      "recommendedIntervalMonths": 72,
+      "priority": "High",
+      "difficulty": "Workshop",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Debris circulation, poor shift quality, contaminated ATF",
+      "fluid": {
+        "specification": "ATF SP-III. Shelf label must explicitly say Mitsubishi SP-III / DiaQueen SP-III / Diamond SP-III compatible.",
+        "serviceFill": "After pan/filter service, refill with measured drained amount and set final level by hot dipstick procedure.",
+        "shelfLabel": "ATF SP-III / Mitsubishi SP-III compatible",
+        "avoid": "Do not use generic Dexron/Mercon unless the bottle explicitly states Mitsubishi SP-III compatibility."
+      },
+      "parts": [
+        {
+          "role": "Internal A/T filter",
+          "oemPartNumber": "MR357710",
+          "oemPartName": "OIL FILTER, A/T VALVE BODY",
+          "confidence": "likely"
+        },
+        {
+          "role": "Filter O-ring",
+          "oemPartNumber": "MD707200",
+          "confidence": "verified"
+        },
+        {
+          "role": "Pan sealant",
+          "oemPartNumber": "MR166584",
+          "confidence": "verified"
+        }
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "replacementChecklist": {
+        "mainParts": [
+          "Internal A/T filter MR357710",
+          "ATF SP-III for refill"
+        ],
+        "sealsWashersHardware": [
+          "Filter O-ring MD707200",
+          "Pan sealant MR166584"
+        ],
+        "usefulExtras": [
+          "Brake cleaner",
+          "Lint-free rags"
+        ],
+        "notes": "Pan service uses sealant; do not assume a paper gasket unless physically confirmed."
+      }
+    },
+    {
+      "id": "automatic_transmission_cooler_lines_and_cooler_heat_exchanger_inspect",
+      "originalItemNumber": 28,
+      "system": "Automatic transmission",
+      "name": "Cooler lines and cooler / heat exchanger",
+      "action": "Inspect",
+      "recommendedIntervalKm": 20000,
+      "recommendedIntervalMonths": 12,
+      "priority": "High",
+      "difficulty": "Easy DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "ATF leak, overheating, low fluid",
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": [],
+      "fluid": null
+    },
+    {
+      "id": "automatic_transmission_atf_service_method_on_unknown_history_diagnose",
+      "originalItemNumber": 29,
+      "system": "Automatic transmission",
+      "name": "ATF service method on unknown history",
+      "action": "Diagnose",
+      "priority": "High",
+      "difficulty": "Workshop",
+      "baselineDue": true,
+      "conditionBased": true,
+      "diagnosticOnly": false,
+      "showInRegularDueList": false,
+      "symptomsIfNeglected": "Post-service shift problems if done badly",
+      "parts": [
+        {
+          "role": "Pan service parts",
+          "oemPartNumber": "MR357710 / MD707200 / MR166584",
+          "confidence": "likely"
+        }
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "fluid": null
+    },
+    {
+      "id": "transfer_case_and_4wd_system_transfer_case_oil_replace",
+      "originalItemNumber": 30,
+      "system": "Transfer case and 4WD system",
+      "name": "Transfer case oil",
+      "action": "Replace",
+      "officialIntervalKm": 100000,
+      "recommendedIntervalKm": 40000,
+      "recommendedIntervalMonths": 36,
+      "priority": "High",
+      "difficulty": "Medium DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Chain/bearing wear, noisy case, poor shifting",
+      "fluid": {
+        "specification": "Gear oil API GL-4, SAE 75W-90 or 75W-85. Shelf label should say GL-4; GL-5-only hypoid oil is not the default transfer-case choice.",
+        "capacity": "2.8 L",
+        "serviceFill": "Fill to level at the filler hole.",
+        "buyQuantity": "3 L",
+        "shelfLabel": "75W-90 GL-4 gear oil / transmission oil",
+        "avoid": "Do not buy GL-5-only differential oil unless it is also clearly approved for GL-4 synchronized/transfer applications."
+      },
+      "parts": [
+        {
+          "role": "Drain/fill plug washers",
+          "oemPartNumber": "MB001294",
+          "confidence": "likely"
+        }
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "replacementChecklist": {
+        "mainParts": [
+          "3 L 75W-90 GL-4 gear oil"
+        ],
+        "sealsWashersHardware": [
+          "Drain/fill plug washers MB001294"
+        ],
+        "usefulExtras": [
+          "Hand pump"
+        ],
+        "notes": "GL-4 is the shelf target for transfer case."
+      }
+    },
+    {
+      "id": "transfer_case_and_4wd_system_transfer_case_oil_leakage_level_inspect",
+      "originalItemNumber": 31,
+      "system": "Transfer case and 4WD system",
+      "name": "Transfer case oil leakage / level",
+      "action": "Inspect",
+      "officialIntervalKm": 20000,
+      "officialIntervalMonths": 12,
+      "recommendedIntervalKm": 10000,
+      "recommendedIntervalMonths": 12,
+      "priority": "High",
+      "difficulty": "Easy DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Low oil, whining, oil misting",
+      "fluid": {
+        "specification": "Gear oil API GL-4, SAE 75W-90 or 75W-85. Shelf label should say GL-4; GL-5-only hypoid oil is not the default transfer-case choice.",
+        "capacity": "2.8 L",
+        "serviceFill": "Inspection only: check leakage and level at filler hole.",
+        "shelfLabel": "75W-90 GL-4 gear oil / transmission oil",
+        "avoid": "Do not buy GL-5-only differential oil unless it is also clearly approved for GL-4 synchronized/transfer applications."
+      },
+      "parts": [
+        {
+          "role": "Transfer plug washers",
+          "oemPartNumber": "MB001294",
+          "confidence": "likely"
+        }
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true
+      }
+    },
+    {
+      "id": "transfer_case_and_4wd_system_super_select_4wd_functional_exercise_test",
+      "originalItemNumber": 32,
+      "system": "Transfer case and 4WD system",
+      "name": "Super Select 4WD functional exercise",
+      "action": "Test",
+      "recommendedIntervalKm": 5000,
+      "recommendedIntervalMonths": 6,
+      "priority": "High",
+      "difficulty": "Easy DIY",
+      "baselineDue": false,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Flashing lamps, sticky engagement, reluctant mode changes",
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": [],
+      "fluid": null
+    },
+    {
+      "id": "transfer_case_and_4wd_system_front_axle_actuator_vacuum_lines_vacuum_s",
+      "originalItemNumber": 33,
+      "system": "Transfer case and 4WD system",
+      "name": "Front axle actuator / vacuum lines / vacuum solenoids",
+      "action": "Inspect / Diagnose",
+      "recommendedIntervalKm": 10000,
+      "recommendedIntervalMonths": 12,
+      "priority": "High",
+      "difficulty": "Medium DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Flashing front-wheel lamps, failure to engage/disengage, grinding",
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": [],
+      "fluid": null
+    },
+    {
+      "id": "transfer_case_and_4wd_system_4wd_switches_and_sensors_indicator_diagno",
+      "originalItemNumber": 34,
+      "system": "Transfer case and 4WD system",
+      "name": "4WD switches and sensors / indicator diagnosis",
+      "action": "Inspect / Diagnose",
+      "recommendedIntervalKm": 20000,
+      "recommendedIntervalMonths": 12,
+      "priority": "High",
+      "difficulty": "Workshop",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Persistent blinking lamps, false mode display",
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": [],
+      "fluid": null
+    },
+    {
+      "id": "differentials_and_driveline_front_differential_oil_replace",
+      "originalItemNumber": 35,
+      "system": "Differentials and driveline",
+      "name": "Front differential oil",
+      "action": "Replace",
+      "officialIntervalKm": 80000,
+      "recommendedIntervalKm": 40000,
+      "recommendedIntervalMonths": 36,
+      "priority": "High",
+      "difficulty": "Medium DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Whine, bearing wear",
+      "fluid": {
+        "specification": "Hypoid differential gear oil API GL-5, SAE 75W-90 or 80W-90.",
+        "capacity": "1.2 L",
+        "serviceFill": "Fill to level at the filler hole.",
+        "buyQuantity": "2 L",
+        "shelfLabel": "75W-90 GL-5 hypoid gear oil",
+        "avoid": "Do not use GL-4 transfer oil here; front differential requires GL-5 hypoid gear oil."
+      },
+      "parts": [
+        {
+          "role": "Drain/fill plug washers",
+          "oemPartNumber": "MB001294",
+          "confidence": "likely"
+        },
+        {
+          "role": "Filler plug kit",
+          "oemPartNumber": "MB001261",
+          "confidence": "likely"
+        }
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "replacementChecklist": {
+        "mainParts": [
+          "2 L 75W-90 GL-5 hypoid gear oil"
+        ],
+        "sealsWashersHardware": [
+          "Drain/fill plug washers MB001294",
+          "Filler plug kit MB001261 if plug damaged"
+        ],
+        "usefulExtras": [
+          "Hand pump"
+        ],
+        "notes": "Fill to level."
+      }
+    },
+    {
+      "id": "differentials_and_driveline_rear_differential_oil_replace",
+      "originalItemNumber": 36,
+      "system": "Differentials and driveline",
+      "name": "Rear differential oil",
+      "action": "Replace",
+      "officialIntervalKm": 80000,
+      "recommendedIntervalKm": 40000,
+      "recommendedIntervalMonths": 36,
+      "priority": "High",
+      "difficulty": "Medium DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Whine, gear wear, chatter if wrong lube used",
+      "fluid": {
+        "specification": "Hypoid differential gear oil API GL-5, SAE 75W-90 or 80W-90. Use normal GL-5 gear oil for the user-verified rear differential service; do not use LSD oil unless LSD is physically confirmed.",
+        "capacity": "1.6 L",
+        "serviceFill": "1.6 L verified on this vehicle.",
+        "buyQuantity": "2 L",
+        "notes": "User-verified service fill on this car.",
+        "shelfLabel": "75W-90 GL-5 hypoid gear oil, non-LSD unless LSD confirmed",
+        "avoid": "Do not buy LSD/friction-modified oil unless the rear axle is confirmed LSD."
+      },
+      "parts": [
+        {
+          "role": "Rear diff plug gasket",
+          "oemPartNumber": "MB001294",
+          "confidence": "likely"
+        },
+        {
+          "role": "Filler plug kit",
+          "oemPartNumber": "MB001261",
+          "confidence": "likely"
+        },
+        {
+          "role": "Rear diff plug",
+          "oemPartNumber": "MR367680",
+          "confidence": "likely"
+        }
+      ],
+      "appNotes": [
+        "User verified fill on this car: 1.6 L. Buy 2 L."
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true,
+        "primaryNote": "Rear differential service fill on this vehicle: 1.6 L."
+      },
+      "replacementChecklist": {
+        "mainParts": [
+          "2 L 75W-90 GL-5 hypoid gear oil"
+        ],
+        "sealsWashersHardware": [
+          "Rear diff plug gasket MB001294",
+          "Filler plug kit MB001261 if plug damaged",
+          "Rear diff plug MR367680 if damaged"
+        ],
+        "usefulExtras": [
+          "Hand pump"
+        ],
+        "notes": "1.6 L service fill verified on this vehicle."
+      }
+    },
+    {
+      "id": "differentials_and_driveline_rear_lsd_locker_verification_inspect",
+      "originalItemNumber": 37,
+      "system": "Differentials and driveline",
+      "name": "Rear LSD / locker verification",
+      "action": "Inspect",
+      "priority": "High",
+      "difficulty": "Easy DIY",
+      "baselineDue": true,
+      "conditionBased": true,
+      "diagnosticOnly": false,
+      "showInRegularDueList": false,
+      "symptomsIfNeglected": "Wrong oil selection, poor locking behaviour",
+      "parts": [
+        {
+          "role": "Rear diff lock air pump",
+          "oemPartNumber": "MR453610",
+          "confidence": "likely"
+        },
+        {
+          "role": "Rear diff lock control unit",
+          "oemPartNumber": "MR305675",
+          "confidence": "likely"
+        },
+        {
+          "role": "Rear diff lock air line hose",
+          "oemPartNumber": "MR453681 / MS605399",
+          "confidence": "likely"
+        }
+      ],
+      "appNotes": [
+        "Use as equipment verification/check item, not a normal fluid service."
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "fluid": null
+    },
+    {
+      "id": "differentials_and_driveline_prop_shafts_u_joints_and_slip_joints_lubri",
+      "originalItemNumber": 38,
+      "system": "Differentials and driveline",
+      "name": "Prop shafts, U-joints and slip joints",
+      "action": "Lubricate",
+      "officialIntervalKm": 20000,
+      "officialIntervalMonths": 12,
+      "recommendedIntervalKm": 10000,
+      "recommendedIntervalMonths": 12,
+      "priority": "High",
+      "difficulty": "Easy DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Clunk, vibration, seized U-joints",
+      "fluid": {
+        "specification": "Lithium-based multipurpose EP2 chassis grease, NLGI No. 2, suitable for U-joints and prop-shaft grease nipples.",
+        "serviceFill": "Grease until fresh grease appears.",
+        "buyQuantity": "1 grease-gun cartridge",
+        "shelfLabel": "Multipurpose lithium EP2 grease, NLGI 2",
+        "avoid": "Do not use thin spray grease as a substitute for grease-gun chassis grease."
+      },
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": [],
+      "replacementChecklist": {
+        "mainParts": [
+          "Multipurpose lithium EP2 grease, NLGI 2"
+        ],
+        "sealsWashersHardware": [],
+        "usefulExtras": [
+          "Grease gun"
+        ],
+        "notes": "Grease until fresh grease purges; do after water/mud use sooner."
+      }
+    },
+    {
+      "id": "differentials_and_driveline_cv_boots_and_axle_seals_inspect",
+      "originalItemNumber": 39,
+      "system": "Differentials and driveline",
+      "name": "CV boots and axle seals",
+      "action": "Inspect",
+      "officialIntervalKm": 20000,
+      "officialIntervalMonths": 12,
+      "recommendedIntervalKm": 10000,
+      "recommendedIntervalMonths": 12,
+      "priority": "High",
+      "difficulty": "Easy DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Grease fling, clicks, oil contamination",
+      "parts": [
+        {
+          "role": "Front outer CV boot kit",
+          "oemPartNumber": "3815A196",
+          "confidence": "likely",
+          "alternatives": [
+            "3815A195",
+            "3815A199",
+            "3815A200",
+            "3815A284",
+            "3815A285"
+          ]
+        }
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "fluid": null,
+      "replacementChecklist": {
+        "mainParts": [
+          "Front outer CV boot kit 3815A196 if boot is split"
+        ],
+        "sealsWashersHardware": [
+          "Axle/diff oil seal MD707184 only if leak source matches"
+        ],
+        "usefulExtras": [
+          "CV grease if not included in kit",
+          "Boot clamps"
+        ],
+        "notes": "Boot kit numbers are candidates; match side/shaft before ordering."
+      }
+    },
+    {
+      "id": "differentials_and_driveline_wheel_bearings_inspect",
+      "originalItemNumber": 40,
+      "system": "Differentials and driveline",
+      "name": "Wheel bearings",
+      "action": "Inspect",
+      "officialIntervalKm": 60000,
+      "officialIntervalMonths": 36,
+      "recommendedIntervalKm": 20000,
+      "recommendedIntervalMonths": 12,
+      "priority": "High",
+      "difficulty": "Workshop",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Rumble, wheel play, hot hub, ABS issues",
+      "parts": [
+        {
+          "role": "Front hub / wheel bearing assembly",
+          "oemPartNumber": "3880A012 / 3880A024 / MN103586 / MR455620 / MR594954",
+          "confidence": "likely"
+        }
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "fluid": null,
+      "replacementChecklist": {
+        "mainParts": [
+          "Front hub/wheel bearing assembly candidates: 3880A012 / 3880A024 / MN103586 / MR455620 / MR594954"
+        ],
+        "sealsWashersHardware": [],
+        "usefulExtras": [
+          "Hub nut/stake hardware as required by repair method"
+        ],
+        "notes": "Verify side and installed hub before ordering."
+      }
+    },
+    {
+      "id": "brakes_brake_fluid_flush",
+      "originalItemNumber": 41,
+      "system": "Brakes",
+      "name": "Brake fluid",
+      "action": "Flush",
+      "officialIntervalKm": 40000,
+      "officialIntervalMonths": 24,
+      "recommendedIntervalKm": 20000,
+      "recommendedIntervalMonths": 24,
+      "priority": "Critical",
+      "difficulty": "Medium DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Soft pedal, corrosion, poor HBB/ABS behaviour",
+      "fluid": {
+        "specification": "DOT 4 brake fluid from a sealed container. DOT 3 is acceptable where specified, but DOT 4 is the practical shelf choice.",
+        "serviceFill": "Flush until clean fluid appears.",
+        "buyQuantity": "1.0–1.5 L",
+        "shelfLabel": "DOT 4 brake fluid",
+        "avoid": "Do not use mineral hydraulic fluid, LHM, silicone DOT 5, or opened old brake fluid."
+      },
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": [],
+      "replacementChecklist": {
+        "mainParts": [
+          "DOT 4 brake fluid, 1.0–1.5 L"
+        ],
+        "sealsWashersHardware": [],
+        "usefulExtras": [
+          "Clear bleed hose",
+          "Catch bottle"
+        ],
+        "notes": "DOT 3 is acceptable by spec, DOT 4 is the practical shelf choice."
+      }
+    },
+    {
+      "id": "brakes_pads_and_discs_inspect",
+      "originalItemNumber": 42,
+      "system": "Brakes",
+      "name": "Pads and discs",
+      "action": "Inspect",
+      "officialIntervalKm": 20000,
+      "officialIntervalMonths": 12,
+      "recommendedIntervalKm": 10000,
+      "recommendedIntervalMonths": 6,
+      "priority": "Critical",
+      "difficulty": "Easy DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Noise, pull, vibration, reduced braking",
+      "parts": [
+        {
+          "role": "Front brake pad set",
+          "oemPartNumber": "MN116445",
+          "confidence": "likely"
+        },
+        {
+          "role": "Front brake disc",
+          "oemPartNumber": "MR407116",
+          "confidence": "likely"
+        },
+        {
+          "role": "Rear brake pad set",
+          "oemPartNumber": "MR510544 / MN102628",
+          "confidence": "likely"
+        },
+        {
+          "role": "Rear brake disc",
+          "oemPartNumber": "MR418067",
+          "confidence": "likely"
+        },
+        {
+          "role": "Parking brake shoes",
+          "oemPartNumber": "MN102645 / MN150861 / MN186248 / MR535718",
+          "confidence": "likely"
+        },
+        {
+          "role": "Front clip set",
+          "confidence": "likely",
+          "oemPartNumber": "4605A057"
+        },
+        {
+          "role": "Rear clip set",
+          "confidence": "likely",
+          "oemPartNumber": "MR510545"
+        },
+        {
+          "role": "Front caliper seal kit",
+          "confidence": "likely",
+          "oemPartNumber": "MR407427"
+        },
+        {
+          "role": "Rear caliper seal kit",
+          "confidence": "likely",
+          "oemPartNumber": "MR510543"
+        }
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "fluid": null,
+      "replacementChecklist": {
+        "mainParts": [
+          "Front brake pad set MN116445",
+          "Front brake discs MR407116",
+          "Rear brake pad set MR510544 / MN102628",
+          "Rear brake discs MR418067",
+          "Parking brake shoes MN102645 / MN150861 / MN186248 / MR535718"
+        ],
+        "sealsWashersHardware": [
+          "Front clip set 4605A057 if needed",
+          "Rear clip set MR510545 if needed"
+        ],
+        "usefulExtras": [
+          "Brake cleaner",
+          "Ceramic/caliper grease for contact points",
+          "Thread locker where manual requires"
+        ],
+        "notes": "Measure discs and compare pad shape before ordering, but the main candidate numbers are now in the app."
+      }
+    },
+    {
+      "id": "brakes_calipers_and_guide_pins_clean_lubricate",
+      "originalItemNumber": 43,
+      "system": "Brakes",
+      "name": "Calipers and guide pins",
+      "action": "Clean / Lubricate",
+      "recommendedIntervalKm": 20000,
+      "recommendedIntervalMonths": 12,
+      "priority": "High",
+      "difficulty": "Medium DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Uneven pad wear, dragging brakes",
+      "parts": [
+        {
+          "role": "Front caliper seal kit",
+          "oemPartNumber": "MR407427",
+          "confidence": "likely"
+        },
+        {
+          "role": "Rear caliper seal kit",
+          "oemPartNumber": "MR510543",
+          "confidence": "likely"
+        },
+        {
+          "role": "Front clip set",
+          "oemPartNumber": "4605A057",
+          "confidence": "likely"
+        },
+        {
+          "role": "Rear clip set",
+          "oemPartNumber": "MR510545",
+          "confidence": "likely"
+        }
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "fluid": null,
+      "replacementChecklist": {
+        "mainParts": [
+          "Front caliper seal kit MR407427 if rebuilding front calipers",
+          "Rear caliper seal kit MR510543 if rebuilding rear calipers"
+        ],
+        "sealsWashersHardware": [
+          "Front clip set 4605A057 if needed",
+          "Rear clip set MR510545 if needed"
+        ],
+        "usefulExtras": [
+          "Caliper slide pin grease",
+          "Brake cleaner"
+        ],
+        "notes": "For normal cleaning/lubrication you usually need grease and cleaner, not full seal kits."
+      }
+    },
+    {
+      "id": "brakes_parking_brake_drum_in_disc_inspect_adjust",
+      "originalItemNumber": 44,
+      "system": "Brakes",
+      "name": "Parking brake (drum-in-disc)",
+      "action": "Inspect / Adjust",
+      "officialIntervalKm": 20000,
+      "officialIntervalMonths": 12,
+      "recommendedIntervalKm": 20000,
+      "recommendedIntervalMonths": 12,
+      "priority": "High",
+      "difficulty": "Medium DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Long travel, poor hill-hold",
+      "parts": [
+        {
+          "role": "Parking brake shoes",
+          "oemPartNumber": "MN102645 / MN150861 / MN186248 / MR535718",
+          "confidence": "likely"
+        }
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "fluid": null,
+      "replacementChecklist": {
+        "mainParts": [
+          "Parking brake shoes MN102645 / MN150861 / MN186248 / MR535718 if worn"
+        ],
+        "sealsWashersHardware": [],
+        "usefulExtras": [
+          "Brake cleaner",
+          "Adjuster service/lubrication"
+        ],
+        "notes": "Spring/hardware kit not locked to OEM here; inspect installed hardware first."
+      }
+    },
+    {
+      "id": "brakes_brake_hoses_and_hard_lines_inspect",
+      "originalItemNumber": 45,
+      "system": "Brakes",
+      "name": "Brake hoses and hard lines",
+      "action": "Inspect",
+      "officialIntervalKm": 20000,
+      "officialIntervalMonths": 12,
+      "recommendedIntervalKm": 10000,
+      "recommendedIntervalMonths": 12,
+      "priority": "Critical",
+      "difficulty": "Easy DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Cracks, leaks, sudden line failure",
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": [],
+      "fluid": null
+    },
+    {
+      "id": "brakes_abs_hbb_code_scan_and_warning_lamp_diagnosis_diagnose",
+      "originalItemNumber": 46,
+      "system": "Brakes",
+      "name": "ABS / HBB code scan and warning-lamp diagnosis",
+      "action": "Diagnose",
+      "priority": "High",
+      "difficulty": "Workshop",
+      "baselineDue": false,
+      "conditionBased": true,
+      "diagnosticOnly": true,
+      "showInRegularDueList": false,
+      "symptomsIfNeglected": "ABS lamp, brake lamp, buzzer, pump cycling",
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": [],
+      "fluid": null
+    },
+    {
+      "id": "brakes_hbb_pump_operation_and_accumulator_health_test",
+      "originalItemNumber": 47,
+      "system": "Brakes",
+      "name": "HBB pump operation and accumulator health",
+      "action": "Test",
+      "priority": "Critical",
+      "difficulty": "Workshop",
+      "baselineDue": false,
+      "conditionBased": true,
+      "diagnosticOnly": true,
+      "showInRegularDueList": false,
+      "symptomsIfNeglected": "Long pump run, buzzing, hard pedal, warning lamp",
+      "appNotes": [
+        "Condition-based diagnostic item only. Do not treat HBB accumulator as a normal recurring maintenance part."
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": [],
+      "fluid": null
+    },
+    {
+      "id": "brakes_hbb_accumulator_pump_motor_relays_diagnose_replace_on_test_fail",
+      "originalItemNumber": 48,
+      "system": "Brakes",
+      "name": "HBB accumulator / pump motor / relays",
+      "action": "Diagnose / Replace on test failure",
+      "priority": "Critical",
+      "difficulty": "Workshop",
+      "baselineDue": false,
+      "conditionBased": true,
+      "diagnosticOnly": true,
+      "showInRegularDueList": false,
+      "symptomsIfNeglected": "Warning buzzer, poor reserve assist, repeated pump run",
+      "parts": [
+        {
+          "role": "HBB accumulator candidate",
+          "oemPartNumber": "4630A011",
+          "confidence": "likely",
+          "alternatives": [
+            "MR527718",
+            "MR977223",
+            "MR977411"
+          ]
+        }
+      ],
+      "appNotes": [
+        "Diagnostic-only item. Do not show as regular due maintenance.",
+        "Do not show as due by mileage. Use only when HBB symptoms/codes are present."
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true,
+        "primaryNote": "Diagnostic-only item. Do not show as regular maintenance."
+      },
+      "fluid": null
+    },
+    {
+      "id": "suspension_and_steering_suspension_system_general_inspect",
+      "originalItemNumber": 49,
+      "system": "Suspension and steering",
+      "name": "Suspension system general",
+      "action": "Inspect",
+      "officialIntervalKm": 20000,
+      "officialIntervalMonths": 12,
+      "recommendedIntervalKm": 10000,
+      "recommendedIntervalMonths": 12,
+      "priority": "High",
+      "difficulty": "Easy DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Clunks, looseness, tyre wear",
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": [],
+      "fluid": null
+    },
+    {
+      "id": "suspension_and_steering_upper_and_lower_ball_joints_dust_boots_inspect",
+      "originalItemNumber": 50,
+      "system": "Suspension and steering",
+      "name": "Upper and lower ball joints / dust boots",
+      "action": "Inspect",
+      "officialIntervalKm": 20000,
+      "officialIntervalMonths": 12,
+      "recommendedIntervalKm": 10000,
+      "recommendedIntervalMonths": 12,
+      "priority": "Critical",
+      "difficulty": "Workshop",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Play, knock, alignment drift",
+      "parts": [
+        {
+          "role": "Front upper ball joint",
+          "oemPartNumber": "4010A056",
+          "confidence": "likely"
+        },
+        {
+          "role": "Front lower ball joint",
+          "oemPartNumber": "MR496799",
+          "confidence": "likely"
+        }
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "fluid": null,
+      "replacementChecklist": {
+        "mainParts": [
+          "Front upper ball joint 4010A056",
+          "Front lower ball joint MR496799"
+        ],
+        "sealsWashersHardware": [
+          "New cotter pins if used by joint design"
+        ],
+        "usefulExtras": [
+          "Alignment after replacement"
+        ],
+        "notes": "Inspect/replace as side-specific job."
+      }
+    },
+    {
+      "id": "suspension_and_steering_control_arm_bushes_stabiliser_links_stabiliser",
+      "originalItemNumber": 51,
+      "system": "Suspension and steering",
+      "name": "Control-arm bushes / stabiliser links / stabiliser bushes",
+      "action": "Inspect",
+      "officialIntervalKm": 20000,
+      "officialIntervalMonths": 12,
+      "recommendedIntervalKm": 10000,
+      "recommendedIntervalMonths": 12,
+      "priority": "High",
+      "difficulty": "Workshop",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Harshness, small-bump rattles, wandering",
+      "parts": [
+        {
+          "role": "Upper control arm bush candidate",
+          "oemPartNumber": "MR496793",
+          "confidence": "likely"
+        },
+        {
+          "role": "Lower control arm bush candidates",
+          "oemPartNumber": "MR496795 / MR496796 / 4013A209 / 4013A210 / 4013A213 / 4013A214 / MR510417",
+          "confidence": "likely"
+        },
+        {
+          "role": "Front stabilizer link RH/LH",
+          "oemPartNumber": "MR374521 / MR374522",
+          "confidence": "likely"
+        },
+        {
+          "role": "Front stabilizer bush 29 mm candidates",
+          "oemPartNumber": "4056A121 / MR151285 / MR374520 / MR554271",
+          "confidence": "likely"
+        }
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "fluid": null,
+      "replacementChecklist": {
+        "mainParts": [
+          "Upper control arm bush MR496793 candidate",
+          "Lower control arm bush candidates MR496795 / MR496796 / 4013A209 / 4013A210 / 4013A213 / 4013A214 / MR510417",
+          "Front stabilizer links MR374521 / MR374522",
+          "Front stabilizer bushes 4056A121 / MR151285 / MR374520 / MR554271"
+        ],
+        "sealsWashersHardware": [],
+        "usefulExtras": [
+          "Alignment after arm/bush work"
+        ],
+        "notes": "Bushes vary by position; use installed part/measurements before ordering."
+      }
+    },
+    {
+      "id": "suspension_and_steering_tie_rods_steering_linkage_seals_and_boots_insp",
+      "originalItemNumber": 52,
+      "system": "Suspension and steering",
+      "name": "Tie rods / steering linkage / seals and boots",
+      "action": "Inspect",
+      "officialIntervalKm": 20000,
+      "officialIntervalMonths": 12,
+      "recommendedIntervalKm": 10000,
+      "recommendedIntervalMonths": 12,
+      "priority": "Critical",
+      "difficulty": "Workshop",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Steering play, toe wear, wandering",
+      "parts": [
+        {
+          "role": "Outer tie rod end RH candidate",
+          "oemPartNumber": "MR508136",
+          "confidence": "likely"
+        },
+        {
+          "role": "Inner tie rod / rack end candidate",
+          "oemPartNumber": "MR510267",
+          "confidence": "likely"
+        }
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "fluid": null,
+      "replacementChecklist": {
+        "mainParts": [
+          "Outer tie rod end RH MR508136 candidate",
+          "Inner tie rod / rack end MR510267 candidate"
+        ],
+        "sealsWashersHardware": [],
+        "usefulExtras": [
+          "Alignment after replacement"
+        ],
+        "notes": "Confirm side before ordering; LH/RH may differ."
+      }
+    },
+    {
+      "id": "suspension_and_steering_steering_column_joints_intermediate_shaft_insp",
+      "originalItemNumber": 53,
+      "system": "Suspension and steering",
+      "name": "Steering-column joints / intermediate shaft",
+      "action": "Inspect",
+      "recommendedIntervalKm": 20000,
+      "recommendedIntervalMonths": 12,
+      "priority": "Medium",
+      "difficulty": "Workshop",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Column clunk, notchiness",
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": [],
+      "fluid": null
+    },
+    {
+      "id": "suspension_and_steering_shocks_and_springs_ride_height_inspect",
+      "originalItemNumber": 54,
+      "system": "Suspension and steering",
+      "name": "Shocks and springs / ride height",
+      "action": "Inspect",
+      "recommendedIntervalKm": 20000,
+      "recommendedIntervalMonths": 12,
+      "priority": "High",
+      "difficulty": "Easy DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Bounce, float, rear sag",
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": [],
+      "fluid": null
+    },
+    {
+      "id": "suspension_and_steering_wheel_alignment_inspect_adjust",
+      "originalItemNumber": 55,
+      "system": "Suspension and steering",
+      "name": "Wheel alignment",
+      "action": "Inspect / Adjust",
+      "officialIntervalKm": 20000,
+      "officialIntervalMonths": 12,
+      "recommendedIntervalKm": 10000,
+      "recommendedIntervalMonths": 12,
+      "priority": "High",
+      "difficulty": "Workshop",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Tyre wear, pull, off-centre wheel",
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": [],
+      "fluid": null
+    },
+    {
+      "id": "body_and_chassis_chassis_and_underbody_corrosion_inspect",
+      "originalItemNumber": 56,
+      "system": "Body and chassis",
+      "name": "Chassis and underbody corrosion",
+      "action": "Inspect",
+      "officialIntervalMonths": 12,
+      "recommendedIntervalMonths": 12,
+      "priority": "Critical",
+      "difficulty": "Easy DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Structural rust, seized fixings",
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": [],
+      "fluid": null
+    },
+    {
+      "id": "body_and_chassis_brake_line_and_fuel_line_corrosion_points_inspect",
+      "originalItemNumber": 57,
+      "system": "Body and chassis",
+      "name": "Brake-line and fuel-line corrosion points",
+      "action": "Inspect",
+      "officialIntervalMonths": 12,
+      "recommendedIntervalMonths": 12,
+      "priority": "Critical",
+      "difficulty": "Easy DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Wet lines, scale, MOT failure",
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": [],
+      "fluid": null
+    },
+    {
+      "id": "body_and_chassis_rear_wheel_arches_sills_door_bottoms_tailgate_seams_i",
+      "originalItemNumber": 58,
+      "system": "Body and chassis",
+      "name": "Rear wheel arches / sills / door bottoms / tailgate seams",
+      "action": "Inspect",
+      "officialIntervalMonths": 12,
+      "recommendedIntervalMonths": 12,
+      "priority": "High",
+      "difficulty": "Easy DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Bubble rust, hidden seam corrosion",
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": [],
+      "fluid": null
+    },
+    {
+      "id": "body_and_chassis_fuel_tank_area_straps_nearby_lines_inspect",
+      "originalItemNumber": 59,
+      "system": "Body and chassis",
+      "name": "Fuel-tank area / straps / nearby lines",
+      "action": "Inspect",
+      "officialIntervalMonths": 12,
+      "recommendedIntervalMonths": 12,
+      "priority": "High",
+      "difficulty": "Workshop",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Rust at tank cradle, seepage",
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": [],
+      "fluid": null
+    },
+    {
+      "id": "body_and_chassis_body_mounts_and_fasteners_inspect",
+      "originalItemNumber": 60,
+      "system": "Body and chassis",
+      "name": "Body mounts and fasteners",
+      "action": "Inspect",
+      "recommendedIntervalKm": 40000,
+      "recommendedIntervalMonths": 24,
+      "priority": "Medium",
+      "difficulty": "Workshop",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Body movement, clunks, seized mount bolts",
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": [],
+      "fluid": null
+    },
+    {
+      "id": "body_and_chassis_sunroof_drains_clean",
+      "originalItemNumber": 61,
+      "system": "Body and chassis",
+      "name": "Sunroof drains",
+      "action": "Clean",
+      "recommendedIntervalKm": 20000,
+      "recommendedIntervalMonths": 12,
+      "priority": "Medium",
+      "difficulty": "Easy DIY",
+      "baselineDue": false,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Wet headlining, damp carpets",
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": [],
+      "fluid": null
+    },
+    {
+      "id": "body_and_chassis_underbody_wax_cavity_protection_renew",
+      "originalItemNumber": 62,
+      "system": "Body and chassis",
+      "name": "Underbody wax / cavity protection",
+      "action": "Renew",
+      "recommendedIntervalKm": 24000,
+      "recommendedIntervalMonths": 24,
+      "priority": "High",
+      "difficulty": "Workshop",
+      "baselineDue": false,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Rust progression each winter",
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": [],
+      "fluid": null
+    },
+    {
+      "id": "body_and_chassis_rear_heater_pipes_rear_hvac_hard_lines_inspect",
+      "originalItemNumber": 63,
+      "system": "Body and chassis",
+      "name": "Rear heater pipes / rear HVAC hard lines",
+      "action": "Inspect",
+      "recommendedIntervalKm": 20000,
+      "recommendedIntervalMonths": 12,
+      "priority": "High",
+      "difficulty": "Workshop",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Coolant loss, weak rear heat/cool, underbody rust",
+      "parts": [
+        {
+          "role": "Rear heater piping group",
+          "oemPartNumber": "MR398930 / MR398929 / MR398931 / MN173438",
+          "confidence": "likely"
+        },
+        {
+          "role": "Rear heater core / module",
+          "oemPartNumber": "MR500698",
+          "confidence": "likely"
+        },
+        {
+          "role": "Rear evaporator",
+          "oemPartNumber": "MR500667",
+          "confidence": "likely"
+        },
+        {
+          "role": "Expansion valve",
+          "oemPartNumber": "7840A006",
+          "confidence": "likely"
+        }
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "fluid": null,
+      "replacementChecklist": {
+        "mainParts": [
+          "Rear heater piping MR398930 / MR398929 / MR398931 / MN173438 if corroded",
+          "Rear heater core/module MR500698 if leaking",
+          "Rear evaporator MR500667 if A/C rear evaporator issue",
+          "Expansion valve 7840A006 if A/C work requires it"
+        ],
+        "sealsWashersHardware": [
+          "Clamps/seals according to removed parts"
+        ],
+        "usefulExtras": [
+          "Coolant or A/C service materials depending on opened circuit"
+        ],
+        "notes": "Inspect first; rear HVAC lines are fitment-sensitive."
+      }
+    },
+    {
+      "id": "electrical_battery_state_electrolyte_case_condition_test",
+      "originalItemNumber": 64,
+      "system": "Electrical",
+      "name": "Battery state / electrolyte / case condition",
+      "action": "Test",
+      "officialIntervalKm": 20000,
+      "officialIntervalMonths": 12,
+      "recommendedIntervalMonths": 6,
+      "priority": "High",
+      "difficulty": "Easy DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Slow crank, low-voltage faults, HBB/ABS nuisance faults",
+      "parts": [
+        {
+          "role": "Battery set",
+          "confidence": "user_likely",
+          "note": "Likely 2×95 Ah setup. Use D31-size batteries; check polarity, tray fitment and CCA on the vehicle before buying.",
+          "specification": "2× 12 V, approx. 95 Ah each, D31 case size, around 760–800 A EN CCA each",
+          "aftermarketExamples": [
+            {
+              "brand": "EXIDE",
+              "partNumber": "EB955",
+              "confidence": "catalogue_cross_reference",
+              "note": "95 Ah, 760 A EN, D31, approx. 306×173×222 mm"
+            },
+            {
+              "brand": "EXIDE",
+              "partNumber": "EL954",
+              "confidence": "catalogue_cross_reference",
+              "note": "95 Ah, 800 A EN, D31 EFB candidate"
+            }
+          ]
+        }
+      ],
+      "appNotes": [
+        "User note: likely 2×95 Ah. Check polarity, dimensions and CCA before purchase."
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true,
+        "primaryNote": "Likely 2×95 Ah, D31 size. Confirm polarity and tray fit before buying."
+      },
+      "fluid": null,
+      "replacementChecklist": {
+        "mainParts": [
+          "Likely 2× 95 Ah D31 batteries",
+          "Examples: EXIDE EB955 / EXIDE EL954"
+        ],
+        "sealsWashersHardware": [],
+        "usefulExtras": [
+          "Terminal cleaner/protection"
+        ],
+        "notes": "Confirm tray size, polarity and CCA before purchase."
+      }
+    },
+    {
+      "id": "electrical_alternator_charging_voltage_belt_load_test",
+      "originalItemNumber": 65,
+      "system": "Electrical",
+      "name": "Alternator charging voltage / belt load",
+      "action": "Test",
+      "recommendedIntervalKm": 20000,
+      "recommendedIntervalMonths": 12,
+      "priority": "High",
+      "difficulty": "Easy DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Dim lamps, battery not charging",
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": [],
+      "fluid": null
+    },
+    {
+      "id": "electrical_grounds_earth_points_starter_cables_clean_inspect",
+      "originalItemNumber": 66,
+      "system": "Electrical",
+      "name": "Grounds / earth points / starter cables",
+      "action": "Clean / Inspect",
+      "recommendedIntervalKm": 20000,
+      "recommendedIntervalMonths": 12,
+      "priority": "High",
+      "difficulty": "Easy DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Slow crank, strange sensor faults, intermittent electrical issues",
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": [],
+      "fluid": null
+    },
+    {
+      "id": "electrical_fuses_relays_lighting_dash_warning_bulbs_inspect_test",
+      "originalItemNumber": 67,
+      "system": "Electrical",
+      "name": "Fuses / relays / lighting / dash warning bulbs",
+      "action": "Inspect / Test",
+      "recommendedIntervalKm": 12000,
+      "recommendedIntervalMonths": 12,
+      "priority": "Medium",
+      "difficulty": "Easy DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Hidden faults if warning lamps do not work",
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": [],
+      "fluid": null
+    },
+    {
+      "id": "electrical_obd_mut_scan_of_engine_a_t_abs_hbb_and_4wd_diagnose",
+      "originalItemNumber": 68,
+      "system": "Electrical",
+      "name": "OBD / MUT scan of engine, A/T, ABS/HBB and 4WD",
+      "action": "Diagnose",
+      "recommendedIntervalKm": 20000,
+      "recommendedIntervalMonths": 12,
+      "priority": "High",
+      "difficulty": "Workshop",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Hidden pending faults, no-code drivability issues",
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": [],
+      "fluid": null
+    },
+    {
+      "id": "electrical_common_failing_engine_control_sensors_diagnose",
+      "originalItemNumber": 69,
+      "system": "Electrical",
+      "name": "Common failing engine-control sensors",
+      "action": "Diagnose",
+      "recommendedIntervalKm": 20000,
+      "recommendedIntervalMonths": 12,
+      "priority": "Medium",
+      "difficulty": "Workshop",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Surging, no-start, reduced power, oil leak",
+      "parts": [
+        {
+          "role": "Boost sensor",
+          "oemPartNumber": "MR577031",
+          "confidence": "likely"
+        },
+        {
+          "role": "Water temperature ECU sensor",
+          "oemPartNumber": "ME202053",
+          "confidence": "likely"
+        },
+        {
+          "role": "Water temperature gauge sender",
+          "oemPartNumber": "ME202052",
+          "confidence": "likely"
+        }
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "fluid": null
+    },
+    {
+      "id": "hvac_cabin_air_purifier_filter_replace",
+      "originalItemNumber": 70,
+      "system": "HVAC",
+      "name": "Cabin / air-purifier filter",
+      "action": "Replace",
+      "officialIntervalKm": 15000,
+      "officialIntervalMonths": 12,
+      "recommendedIntervalKm": 15000,
+      "recommendedIntervalMonths": 12,
+      "priority": "Medium",
+      "difficulty": "Easy DIY",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Weak airflow, odour, fogging",
+      "parts": [
+        {
+          "role": "Cabin filter / air refresher",
+          "oemPartNumber": "MR500058 / 7803A028",
+          "confidence": "likely",
+          "alternatives": [
+            "MI4020 LHD aftermarket"
+          ]
+        }
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "fluid": null,
+      "replacementChecklist": {
+        "mainParts": [
+          "Cabin filter MR500058 / 7803A028",
+          "Aftermarket MI4020 LHD"
+        ],
+        "sealsWashersHardware": [],
+        "usefulExtras": [],
+        "notes": "Confirm filter slot behind glovebox once."
+      }
+    },
+    {
+      "id": "hvac_a_c_service_leak_test_refrigerant_service_test_recharge_on_condit",
+      "originalItemNumber": 71,
+      "system": "HVAC",
+      "name": "A/C service / leak test / refrigerant service",
+      "action": "Test / Recharge on condition",
+      "priority": "Medium",
+      "difficulty": "Workshop",
+      "baselineDue": true,
+      "conditionBased": true,
+      "diagnosticOnly": false,
+      "showInRegularDueList": false,
+      "symptomsIfNeglected": "Warm air, poor cooling, noisy compressor",
+      "fluid": {
+        "specification": "R134a refrigerant. Exact charge must be read from the under-bonnet A/C label before service.",
+        "serviceFill": "Read exact charge from the under-bonnet A/C label before service.",
+        "shelfLabel": "R134a refrigerant",
+        "avoid": "Do not use R1234yf or hydrocarbon substitutes unless a qualified A/C technician intentionally converts the system."
+      },
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": [],
+      "replacementChecklist": {
+        "mainParts": [
+          "R134a refrigerant, charge by under-bonnet label"
+        ],
+        "sealsWashersHardware": [
+          "A/C O-rings only if a joint is opened"
+        ],
+        "usefulExtras": [
+          "Leak dye if workshop uses it"
+        ],
+        "notes": "A/C must be serviced by proper recovery/recharge equipment."
+      }
+    },
+    {
+      "id": "hvac_condenser_evaporator_drain_blower_motor_heater_core_rear_heater_i",
+      "originalItemNumber": 72,
+      "system": "HVAC",
+      "name": "Condenser / evaporator drain / blower motor / heater core / rear heater",
+      "action": "Inspect / Clean",
+      "recommendedIntervalKm": 20000,
+      "recommendedIntervalMonths": 12,
+      "priority": "High",
+      "difficulty": "Workshop",
+      "baselineDue": true,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Odour, wet carpets, weak airflow, coolant smell",
+      "parts": [
+        {
+          "role": "Rear heater core / module",
+          "oemPartNumber": "MR500698",
+          "confidence": "likely"
+        },
+        {
+          "role": "Rear evaporator",
+          "oemPartNumber": "MR500667",
+          "confidence": "likely"
+        },
+        {
+          "role": "Expansion valve",
+          "oemPartNumber": "7840A006",
+          "confidence": "likely"
+        }
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "fluid": null,
+      "replacementChecklist": {
+        "mainParts": [
+          "Rear heater core/module MR500698 if leaking",
+          "Rear evaporator MR500667 if failed",
+          "Expansion valve 7840A006 if A/C diagnosis needs it"
+        ],
+        "sealsWashersHardware": [],
+        "usefulExtras": [
+          "Drain cleaner / evaporator cleaner"
+        ],
+        "notes": "Inspection/cleaning item; parts only if fault is found."
+      }
+    },
+    {
+      "id": "interior_and_comfort_seat_mechanisms_lubricate_inspect",
+      "originalItemNumber": 73,
+      "system": "Interior and comfort",
+      "name": "Seat mechanisms",
+      "action": "Lubricate / Inspect",
+      "recommendedIntervalMonths": 12,
+      "priority": "Low",
+      "difficulty": "Easy DIY",
+      "baselineDue": false,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Stiff adjusters",
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": [],
+      "fluid": null
+    },
+    {
+      "id": "interior_and_comfort_locks_hinges_bonnet_and_tailgate_latches_lubricat",
+      "originalItemNumber": 74,
+      "system": "Interior and comfort",
+      "name": "Locks, hinges, bonnet and tailgate latches",
+      "action": "Lubricate",
+      "recommendedIntervalMonths": 12,
+      "priority": "Medium",
+      "difficulty": "Easy DIY",
+      "baselineDue": false,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Stiff locks, latch wear",
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": [],
+      "fluid": null
+    },
+    {
+      "id": "interior_and_comfort_window_regulators_and_channels_inspect_lubricate",
+      "originalItemNumber": 75,
+      "system": "Interior and comfort",
+      "name": "Window regulators and channels",
+      "action": "Inspect / Lubricate",
+      "recommendedIntervalMonths": 12,
+      "priority": "Medium",
+      "difficulty": "Medium DIY",
+      "baselineDue": false,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Slow windows, grinding, dropped glass",
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": [],
+      "fluid": null
+    },
+    {
+      "id": "interior_and_comfort_wiper_blades_and_washer_system_replace_flush",
+      "originalItemNumber": 76,
+      "system": "Interior and comfort",
+      "name": "Wiper blades and washer system",
+      "action": "Replace / Flush",
+      "recommendedIntervalMonths": 12,
+      "priority": "Medium",
+      "difficulty": "Easy DIY",
+      "baselineDue": false,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Streaking, blocked jets, poor visibility",
+      "fluid": {
+        "specification": "Screenwash / washer fluid suitable for season. Use winter screenwash with enough frost protection for local climate.",
+        "buyQuantity": "As needed",
+        "shelfLabel": "Winter/summer screenwash, e.g. -20 °C winter mix",
+        "avoid": "Do not use plain water in freezing conditions."
+      },
+      "parts": [
+        {
+          "role": "Front wiper blades",
+          "confidence": "likely",
+          "note": "Common catalogue reference is 550/500 mm; some listings show 500/500 mm. Measure installed blades before buying.",
+          "size": "550/500 mm likely",
+          "aftermarketExamples": [
+            {
+              "brand": "BOSCH",
+              "partNumber": "3 397 118 423",
+              "confidence": "catalogue_cross_reference",
+              "note": "Twin Spoiler kit 550/500 mm"
+            },
+            {
+              "brand": "BOSCH",
+              "partNumber": "3 397 118 422",
+              "confidence": "catalogue_cross_reference",
+              "note": "Twin kit 550/500 mm"
+            },
+            {
+              "brand": "MCE",
+              "partNumber": "MCE0102",
+              "confidence": "retailer_cross_reference",
+              "note": "MitzyBitz front blade 500 mm for V78W"
+            }
+          ]
+        },
+        {
+          "role": "Rear wiper blade",
+          "confidence": "user_verified",
+          "note": "400 mm verified on this vehicle.",
+          "size": "400 mm",
+          "aftermarketExamples": [
+            {
+              "brand": "RIDEX PLUS",
+              "partNumber": "298W0169P",
+              "confidence": "catalogue_cross_reference",
+              "note": "400 mm rear/front listing; use size as practical value"
+            }
+          ]
+        }
+      ],
+      "appNotes": [
+        "Rear blade: 400 mm verified on this vehicle. Front likely 550/500 mm, but measure before buying."
+      ],
+      "appDisplay": {
+        "hideEmptyFields": true,
+        "primaryNote": "Rear wiper: 400 mm verified. Front likely 550/500 mm."
+      },
+      "replacementChecklist": {
+        "mainParts": [
+          "Front wipers: 550/500 mm likely; Bosch 3 397 118 423 or 3 397 118 422 candidates",
+          "Rear wiper: 400 mm verified; RIDEX PLUS 298W0169P candidate"
+        ],
+        "sealsWashersHardware": [],
+        "usefulExtras": [
+          "Winter/summer screenwash"
+        ],
+        "notes": "Rear 400 mm is user-verified. Measure front blades once and store final sizes."
+      }
+    },
+    {
+      "id": "interior_and_comfort_tailgate_spare_carrier_back_door_hardware_inspect",
+      "originalItemNumber": 77,
+      "system": "Interior and comfort",
+      "name": "Tailgate / spare carrier / back-door hardware",
+      "action": "Inspect / Lubricate",
+      "recommendedIntervalMonths": 12,
+      "priority": "Medium",
+      "difficulty": "Easy DIY",
+      "baselineDue": false,
+      "conditionBased": false,
+      "diagnosticOnly": false,
+      "showInRegularDueList": true,
+      "symptomsIfNeglected": "Door sag, rattles, seized fasteners",
+      "appDisplay": {
+        "hideEmptyFields": true
+      },
+      "parts": [],
+      "fluid": null
+    }
+  ]
+}

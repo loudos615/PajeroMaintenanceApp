@@ -1,7 +1,8 @@
-import maintenanceDatabase from "./maintenance_items_v10.json";
-import { SYSTEM_ORDER, type MaintenanceItem, type SystemName } from "../types";
+import maintenanceDatabase from "./maintenance_items_v17_parts_checklist.json";
+import { SYSTEM_ORDER, type MaintenanceItem, type MaintenanceVehicleProfile, type SystemName } from "../types";
 
 interface RawMaintenanceDatabase {
+  vehicleProfile?: MaintenanceVehicleProfile;
   maintenanceItems?: Array<Partial<MaintenanceItem> & Record<string, unknown>>;
 }
 
@@ -63,10 +64,12 @@ function normalizeItem(raw: Partial<MaintenanceItem> & Record<string, unknown>):
     baselineDue: Boolean(raw.baselineDue ?? raw.afterPurchaseUnknownHistory ?? false),
     conditionBased: Boolean(raw.conditionBased ?? false),
     diagnosticOnly: Boolean(raw.diagnosticOnly ?? false),
+    showInRegularDueList: raw.showInRegularDueList !== false,
     verificationRequired: Boolean(raw.verificationRequired ?? verification?.needed ?? false),
     verification,
     parts: Array.isArray(raw.parts) ? raw.parts : null,
     fluid,
+    replacementChecklist: raw.replacementChecklist ?? null,
     fluidSpec: raw.fluidSpec ?? fluid?.specification ?? null,
     symptomsIfNeglected: raw.symptomsIfNeglected ? String(raw.symptomsIfNeglected) : null,
     notes: normalizeNotes(appNotes),
@@ -78,6 +81,8 @@ function normalizeItem(raw: Partial<MaintenanceItem> & Record<string, unknown>):
 }
 
 const database = maintenanceDatabase as RawMaintenanceDatabase;
+
+export const maintenanceVehicleProfile: MaintenanceVehicleProfile = database.vehicleProfile ?? {};
 
 export const maintenanceItems: MaintenanceItem[] = (database.maintenanceItems ?? [])
   .map(normalizeItem)
