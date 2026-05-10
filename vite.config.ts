@@ -28,7 +28,8 @@ export default defineConfig({
         maximumFileSizeToCacheInBytes: 8 * 1024 * 1024,
         runtimeCaching: [
           {
-            urlPattern: ({ url }) => url.pathname.endsWith("/maintenance_items.json"),
+            urlPattern: ({ url }) =>
+              url.pathname.endsWith("/maintenance_items.json") || url.pathname.endsWith("/maintenance_items_v10.json"),
             handler: "CacheFirst",
             options: {
               cacheName: "pajero-maintenance-seed",

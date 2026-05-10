@@ -61,7 +61,9 @@ export default function App() {
           profile={data.profile}
           dueInfos={data.dueInfos}
           serviceRecords={data.serviceRecords}
+          localPartsNote={data.localPartsNotes.find((note) => note.itemId === decodeURIComponent(route.params[0] ?? ""))}
           onSaveRecord={data.recordService}
+          onSavePartsNote={data.savePartsNote}
         />
       ) : null}
       {route.name === "odometer" ? (
@@ -76,7 +78,6 @@ export default function App() {
         <Settings
           profile={data.profile}
           odometerReadings={data.odometerReadings}
-          onSaveProfile={data.updateProfile}
           onImportComplete={data.reload}
           onReset={data.resetAll}
         />

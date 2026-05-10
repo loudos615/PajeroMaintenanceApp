@@ -19,11 +19,13 @@ export function MaintenanceCard({ dueInfo, onOpen }: MaintenanceCardProps) {
           <StatusBadge status={dueInfo.status} />
         </span>
         <span className="muted">
-          {item.system} · {item.action} · {item.priority}
+          {item.system} - {item.action} - {item.priority}
         </span>
         <span className="maintenance-card__intervals">
-          <span>Next: {dueInfo.dueKm ? formatKm(dueInfo.dueKm) : dueInfo.dueDate ? formatDate(dueInfo.dueDate) : dueInfo.reason}</span>
-          <span>Preventive: {formatInterval(item.preventiveIntervalKm, item.preventiveIntervalMonths)}</span>
+          <span>
+            Next: {dueInfo.dueKm ? formatKm(dueInfo.dueKm) : dueInfo.dueDate ? formatDate(dueInfo.dueDate) : dueInfo.reason}
+          </span>
+          <span>Recommended: {formatInterval(item.preventiveIntervalKm, item.preventiveIntervalMonths)}</span>
           <span>Official: {formatInterval(item.officialIntervalKm, item.officialIntervalMonths)}</span>
         </span>
       </span>

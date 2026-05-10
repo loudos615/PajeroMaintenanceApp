@@ -13,13 +13,13 @@ This is a private local tracker, not a generic vehicle maintenance service. It h
 
 ## Data
 
-The seed maintenance database is generated from `maintenance_source.md` and stored at:
+The active seed maintenance database is stored at:
 
 ```text
-src/data/maintenance_items.json
+src/data/maintenance_items_v10.json
 ```
 
-The JSON preserves the app fields from the markdown tables, including official and preventive intervals, priorities, difficulty, parts, fluid specs, source keys, after-purchase unknown-history flags, condition-based rows, symptoms, source type, and verification-required flags.
+The app uses this local JSON for recommended intervals, official interval references, parts, fluids, capacities, and practical service notes.
 
 ## Run Locally
 
@@ -39,7 +39,7 @@ npm run preview
 
 ## Offline And OCR Notes
 
-The app shell and `maintenance_items.json` are cached by the service worker after the first successful load. Manual odometer entry and saved service history work offline once the app has loaded.
+The app shell and local maintenance database are cached by the service worker after the first successful load. Manual odometer entry and saved service history work offline once the app has loaded.
 
 Odometer OCR uses Tesseract.js in the browser. The app caches common Tesseract worker/core/language asset URLs when they are fetched, but the first OCR run may still need network access depending on how Tesseract resolves its assets in the installed package and browser. After those assets are fetched and cached, OCR is intended to keep working without another network request. Manual odometer entry always remains available.
 

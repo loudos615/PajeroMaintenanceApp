@@ -45,7 +45,7 @@ export function Dashboard({ profile, dueInfos, odometerReadings, onDismissOdomet
   return (
     <main className="page">
       <section className="vehicle-hero">
-        <h1>Pajero V78W</h1>
+        <h1>Mitsubishi Pajero</h1>
       </section>
 
       {showReminder ? (
@@ -104,7 +104,7 @@ export function Dashboard({ profile, dueInfos, odometerReadings, onDismissOdomet
         </div>
         <div className="stat-card stat-card--baseline">
           <span>{baselineCount}</span>
-          <p>Baseline</p>
+          <p>Due now</p>
         </div>
       </section>
 

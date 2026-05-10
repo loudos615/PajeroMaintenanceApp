@@ -11,7 +11,7 @@ export function formatDate(value: string | null | undefined): string {
   return format(parseISO(value), "d MMM yyyy");
 }
 
-export function formatInterval(km: number | null, months: number | null): string {
+export function formatInterval(km: number | null | undefined, months: number | null | undefined): string {
   const parts = [];
   if (km) parts.push(formatKm(km));
   if (months) parts.push(`${months} mo`);
@@ -21,7 +21,7 @@ export function formatInterval(km: number | null, months: number | null): string
 export function statusLabel(status: DueStatus): string {
   switch (status) {
     case "baselineDueNow":
-      return "Baseline";
+      return "Due now";
     case "overdue":
       return "Overdue";
     case "dueSoon":
@@ -36,7 +36,7 @@ export function statusLabel(status: DueStatus): string {
 }
 
 export function priorityRank(item: MaintenanceItem): number {
-  const priority = item.priority.toLowerCase();
+  const priority = (item.priority ?? "").toLowerCase();
   if (priority === "critical") return 0;
   if (priority === "high") return 1;
   if (priority === "medium") return 2;

@@ -29,6 +29,15 @@ function statusFromSignals(kmRemaining: number | null, daysRemaining: number | n
   return "ok";
 }
 
+function isBaselineDue(item: MaintenanceItem): boolean {
+  return Boolean(item.baselineDue ?? item.afterPurchaseUnknownHistory);
+}
+
+function isHbbDiagnosticItem(item: MaintenanceItem): boolean {
+  const text = `${item.name} ${item.action}`.toLowerCase();
+  return text.includes("hbb") || text.includes("hydraulic brake booster");
+}
+
 export function calculateDueInfo(
   item: MaintenanceItem,
   profile: VehicleProfile,
@@ -38,7 +47,22 @@ export function calculateDueInfo(
   const records = allRecords.filter((record) => record.itemId === item.id);
   const latestRecord = mostRecentRecord(records);
 
-  if (profile.unknownHistoryMode && item.afterPurchaseUnknownHistory && !latestRecord) {
+  if (isHbbDiagnosticItem(item) && (item.diagnosticOnly || item.conditionBased)) {
+    return {
+      item,
+      status: "conditionBased",
+      dueKm: null,
+      dueDate: null,
+      kmRemaining: null,
+      daysRemaining: null,
+      basis: "condition",
+      lastPerformedDate: latestRecord?.performedDate ?? null,
+      lastPerformedOdometerKm: latestRecord?.performedOdometerKm ?? null,
+      reason: "Condition based"
+    };
+  }
+
+  if (isBaselineDue(item) && !latestRecord) {
     return {
       item,
       status: "baselineDueNow",
@@ -49,7 +73,7 @@ export function calculateDueInfo(
       basis: "unknownHistory",
       lastPerformedDate: null,
       lastPerformedOdometerKm: null,
-      reason: "Unknown history baseline item"
+      reason: "Due now"
     };
   }
 

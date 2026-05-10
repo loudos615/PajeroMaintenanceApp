@@ -1,8 +1,8 @@
 import { openDB, type DBSchema, type IDBPDatabase } from "idb";
-import type { AppExport, OdometerReading, ServiceRecord, VehicleProfile } from "../types";
+import type { AppExport, LocalPartsNote, OdometerReading, ServiceRecord, VehicleProfile } from "../types";
 
 const DB_NAME = "pajero-maintenance-db";
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 const PROFILE_ID = "v78w-2001";
 
 export const DEFAULT_VEHICLE_PROFILE: VehicleProfile = {
@@ -26,7 +26,7 @@ function normalizeVehicleProfile(profile: Partial<VehicleProfile> | null | undef
     id: PROFILE_ID,
     purchaseDate: profile?.purchaseDate ?? DEFAULT_VEHICLE_PROFILE.purchaseDate,
     purchaseOdometerKm: profile?.purchaseOdometerKm ?? DEFAULT_VEHICLE_PROFILE.purchaseOdometerKm,
-    unknownHistoryMode: profile?.unknownHistoryMode ?? DEFAULT_VEHICLE_PROFILE.unknownHistoryMode,
+    unknownHistoryMode: true,
     odometerReminderDismissedAt: profile?.odometerReminderDismissedAt ?? null
   };
 }
@@ -51,6 +51,10 @@ interface PajeroMaintenanceDb extends DBSchema {
       date: string;
     };
   };
+  localPartsNotes: {
+    key: string;
+    value: LocalPartsNote;
+  };
 }
 
 let dbPromise: Promise<IDBPDatabase<PajeroMaintenanceDb>> | null = null;
@@ -71,6 +75,10 @@ function getDb() {
       if (!db.objectStoreNames.contains("odometerReadings")) {
         const readings = db.createObjectStore("odometerReadings", { keyPath: "id" });
         readings.createIndex("date", "date");
+      }
+
+      if (!db.objectStoreNames.contains("localPartsNotes")) {
+        db.createObjectStore("localPartsNotes", { keyPath: "itemId" });
       }
     }
   });
@@ -127,18 +135,43 @@ export async function addOdometerReading(reading: OdometerReading): Promise<void
   await db.put("odometerReadings", reading);
 }
 
+export async function getLocalPartsNotes(): Promise<LocalPartsNote[]> {
+  const db = await getDb();
+  const notes = await db.getAll("localPartsNotes");
+  return notes.sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
+}
+
+export async function getLocalPartsNote(itemId: string): Promise<LocalPartsNote | undefined> {
+  const db = await getDb();
+  return db.get("localPartsNotes", itemId);
+}
+
+export async function saveLocalPartsNote(note: LocalPartsNote): Promise<void> {
+  const db = await getDb();
+  await db.put("localPartsNotes", note);
+}
+
 export async function exportUserData(): Promise<AppExport> {
-  const [vehicleProfile, serviceRecords, odometerReadings] = await Promise.all([
+  const [vehicleProfile, serviceRecords, odometerReadings, localPartsNotes] = await Promise.all([
     getVehicleProfile(),
     getServiceRecords(),
-    getOdometerReadings()
+    getOdometerReadings(),
+    getLocalPartsNotes()
   ]);
 
   return {
     exportedAt: new Date().toISOString(),
     vehicleProfile,
     serviceRecords,
-    odometerReadings
+    odometerReadings,
+    localPartsNotes,
+    dismissedReminders: {
+      odometerReminderDismissedAt: vehicleProfile.odometerReminderDismissedAt
+    },
+    settings: {
+      unknownHistoryMode: true,
+      odometerReminderDismissedAt: vehicleProfile.odometerReminderDismissedAt
+    }
   };
 }
 
@@ -148,12 +181,14 @@ export async function importUserData(data: AppExport): Promise<void> {
   }
 
   const db = await getDb();
-  const tx = db.transaction(["vehicleProfile", "serviceRecords", "odometerReadings"], "readwrite");
+  const hasLocalPartsNotes = Array.isArray(data.localPartsNotes);
+  const tx = db.transaction(["vehicleProfile", "serviceRecords", "odometerReadings", "localPartsNotes"], "readwrite");
 
   await Promise.all([
     tx.objectStore("vehicleProfile").clear(),
     tx.objectStore("serviceRecords").clear(),
-    tx.objectStore("odometerReadings").clear()
+    tx.objectStore("odometerReadings").clear(),
+    hasLocalPartsNotes ? tx.objectStore("localPartsNotes").clear() : Promise.resolve()
   ]);
 
   await tx.objectStore("vehicleProfile").put(normalizeVehicleProfile(data.vehicleProfile));
@@ -166,16 +201,23 @@ export async function importUserData(data: AppExport): Promise<void> {
     await tx.objectStore("odometerReadings").put(reading);
   }
 
+  if (hasLocalPartsNotes) {
+    for (const note of data.localPartsNotes) {
+      await tx.objectStore("localPartsNotes").put(note);
+    }
+  }
+
   await tx.done;
 }
 
 export async function resetUserData(): Promise<void> {
   const db = await getDb();
-  const tx = db.transaction(["vehicleProfile", "serviceRecords", "odometerReadings"], "readwrite");
+  const tx = db.transaction(["vehicleProfile", "serviceRecords", "odometerReadings", "localPartsNotes"], "readwrite");
   await Promise.all([
     tx.objectStore("vehicleProfile").clear(),
     tx.objectStore("serviceRecords").clear(),
-    tx.objectStore("odometerReadings").clear()
+    tx.objectStore("odometerReadings").clear(),
+    tx.objectStore("localPartsNotes").clear()
   ]);
   await tx.objectStore("vehicleProfile").put(DEFAULT_VEHICLE_PROFILE);
   await tx.done;

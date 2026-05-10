@@ -10,7 +10,7 @@ const FILTERS: Array<{ key: FilterKey; label: string; status?: DueStatus }> = [
   { key: "all", label: "All" },
   { key: "overdue", label: "Overdue", status: "overdue" },
   { key: "dueSoon", label: "Due soon", status: "dueSoon" },
-  { key: "baselineDueNow", label: "Baseline", status: "baselineDueNow" },
+  { key: "baselineDueNow", label: "Due now", status: "baselineDueNow" },
   { key: "ok", label: "OK", status: "ok" },
   { key: "conditionBased", label: "Condition based", status: "conditionBased" }
 ];
@@ -39,7 +39,7 @@ export function MaintenanceList({ dueInfos }: MaintenanceListProps) {
   return (
     <main className="page">
       <section className="section-block">
-        <p className="eyebrow">V78W service database</p>
+        <p className="eyebrow">Service database</p>
         <h1>Maintenance</h1>
         <div className="filter-row" role="tablist" aria-label="Maintenance filters">
           {FILTERS.map((item) => (

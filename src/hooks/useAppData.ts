@@ -1,23 +1,24 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import maintenanceItems from "../data/maintenance_items.json";
+import { maintenanceItems } from "../data/maintenanceItems";
 import {
   addOdometerReading,
   addServiceRecord,
+  getLocalPartsNotes,
   getOdometerReadings,
   getServiceRecords,
   getVehicleProfile,
   resetUserData,
+  saveLocalPartsNote,
   saveVehicleProfile
 } from "../db/indexedDb";
 import { calculateAllDue } from "../services/dueCalculator";
-import type { MaintenanceItem, OdometerReading, ServiceRecord, VehicleProfile } from "../types";
-
-const typedMaintenanceItems = maintenanceItems as MaintenanceItem[];
+import type { LocalPartsNote, OdometerReading, ServiceRecord, VehicleProfile } from "../types";
 
 export function useAppData() {
   const [profile, setProfile] = useState<VehicleProfile | null>(null);
   const [serviceRecords, setServiceRecords] = useState<ServiceRecord[]>([]);
   const [odometerReadings, setOdometerReadings] = useState<OdometerReading[]>([]);
+  const [localPartsNotes, setLocalPartsNotes] = useState<LocalPartsNote[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -25,14 +26,16 @@ export function useAppData() {
     setLoading(true);
     setError(null);
     try {
-      const [nextProfile, nextRecords, nextReadings] = await Promise.all([
+      const [nextProfile, nextRecords, nextReadings, nextPartsNotes] = await Promise.all([
         getVehicleProfile(),
         getServiceRecords(),
-        getOdometerReadings()
+        getOdometerReadings(),
+        getLocalPartsNotes()
       ]);
       setProfile(nextProfile);
       setServiceRecords(nextRecords);
       setOdometerReadings(nextReadings);
+      setLocalPartsNotes(nextPartsNotes);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Could not load local data.");
     } finally {
@@ -100,16 +103,25 @@ export function useAppData() {
     await reload();
   }, [reload]);
 
+  const savePartsNote = useCallback(async (note: LocalPartsNote) => {
+    await saveLocalPartsNote(note);
+    setLocalPartsNotes((current) => [
+      note,
+      ...current.filter((existing) => existing.itemId !== note.itemId)
+    ]);
+  }, []);
+
   const dueInfos = useMemo(() => {
     if (!profile) return [];
-    return calculateAllDue(typedMaintenanceItems, profile, serviceRecords);
+    return calculateAllDue(maintenanceItems, profile, serviceRecords);
   }, [profile, serviceRecords]);
 
   return {
-    items: typedMaintenanceItems,
+    items: maintenanceItems,
     profile,
     serviceRecords,
     odometerReadings,
+    localPartsNotes,
     dueInfos,
     loading,
     error,
@@ -117,6 +129,7 @@ export function useAppData() {
     updateProfile,
     recordOdometer,
     recordService,
+    savePartsNote,
     dismissOdometerReminder,
     resetAll
   };

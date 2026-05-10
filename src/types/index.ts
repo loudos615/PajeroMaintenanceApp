@@ -15,6 +15,33 @@ export type SystemName = (typeof SYSTEM_ORDER)[number];
 
 export type Priority = "Critical" | "High" | "Medium" | "Low" | string;
 
+export interface MaintenanceFluid {
+  specification?: string | null;
+  capacity?: string | null;
+  serviceFill?: string | null;
+  notes?: string | null;
+}
+
+export interface MaintenancePart {
+  role?: string | null;
+  specification?: string | null;
+  capacity?: string | null;
+  quantity?: string | null;
+  buyQuantity?: string | null;
+  oemPartNumber?: string | null;
+  oemPartName?: string | null;
+  alternatives?: string[] | null;
+  aftermarketExamples?: string[] | null;
+  confidence?: string | null;
+  note?: string | null;
+}
+
+export interface MaintenanceVerification {
+  needed?: boolean;
+  shortLabel?: string | null;
+  reason?: string | null;
+}
+
 export interface VehicleProfile {
   id: string;
   name: string;
@@ -38,15 +65,23 @@ export interface MaintenanceItem {
   officialIntervalMonths: number | null;
   preventiveIntervalKm: number | null;
   preventiveIntervalMonths: number | null;
+  recommendedIntervalKm?: number | null;
+  recommendedIntervalMonths?: number | null;
   priority: Priority;
   difficulty: string | null;
   afterPurchaseUnknownHistory: boolean;
+  baselineDue?: boolean;
   conditionBased: boolean;
+  diagnosticOnly?: boolean;
   verificationRequired: boolean;
-  parts: string[] | null;
+  verification?: MaintenanceVerification | null;
+  parts: Array<string | MaintenancePart> | null;
+  fluid?: MaintenanceFluid | null;
   fluidSpec: string | null;
   symptomsIfNeglected: string | null;
   notes: string | null;
+  appNotes?: string[];
+  originalNotes?: string | null;
   sourceType: string | null;
   sourceKeys: string[];
 }
@@ -69,6 +104,16 @@ export interface OdometerReading {
   method: "manual" | "ocr";
   rawOcrText: string | null;
   confirmed: true;
+}
+
+export interface LocalPartsNote {
+  itemId: string;
+  preferredBrand: string;
+  oemNumberChecked: string;
+  aftermarketPartUsed: string;
+  shopLink: string;
+  personalNote: string;
+  updatedAt: string;
 }
 
 export type DueStatus =
@@ -97,4 +142,12 @@ export interface AppExport {
   vehicleProfile: VehicleProfile;
   serviceRecords: ServiceRecord[];
   odometerReadings: OdometerReading[];
+  localPartsNotes: LocalPartsNote[];
+  dismissedReminders: {
+    odometerReminderDismissedAt: string | null;
+  };
+  settings: {
+    unknownHistoryMode: boolean;
+    odometerReminderDismissedAt: string | null;
+  };
 }

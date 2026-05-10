@@ -1,5 +1,5 @@
 import { Download, RotateCcw, Upload } from "lucide-react";
-import { type ChangeEvent, type FormEvent, useEffect, useMemo, useState } from "react";
+import { type ChangeEvent, useMemo, useState } from "react";
 import { APP_VERSION } from "../app/version";
 import { exportUserData, importUserData } from "../db/indexedDb";
 import { checkForUpdateAndReload } from "../services/appUpdate";
@@ -9,7 +9,6 @@ import { formatDate, formatKm } from "../utils/format";
 interface SettingsProps {
   profile: VehicleProfile;
   odometerReadings: OdometerReading[];
-  onSaveProfile: (profile: VehicleProfile) => Promise<void>;
   onImportComplete: () => Promise<void>;
   onReset: () => Promise<void>;
 }
@@ -28,36 +27,29 @@ function downloadJson(filename: string, data: unknown) {
   URL.revokeObjectURL(url);
 }
 
-export function Settings({ profile, odometerReadings, onSaveProfile, onImportComplete, onReset }: SettingsProps) {
-  const [unknownHistoryMode, setUnknownHistoryMode] = useState(profile.unknownHistoryMode);
+function Detail({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="detail-row">
+      <dt>{label}</dt>
+      <dd>{value}</dd>
+    </div>
+  );
+}
+
+export function Settings({ profile, odometerReadings, onImportComplete, onReset }: SettingsProps) {
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [checkingForUpdate, setCheckingForUpdate] = useState(false);
-
-  useEffect(() => {
-    setUnknownHistoryMode(profile.unknownHistoryMode);
-  }, [profile.unknownHistoryMode]);
 
   const sortedOdometerReadings = useMemo(
     () => [...odometerReadings].sort((a, b) => b.date.localeCompare(a.date)),
     [odometerReadings]
   );
 
-  async function saveSettings(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setError(null);
-    setMessage(null);
-    await onSaveProfile({
-      ...profile,
-      unknownHistoryMode
-    });
-    setMessage("Settings saved.");
-  }
-
   async function handleExport() {
     const data = await exportUserData();
-    downloadJson(`pajero-maintenance-${new Date().toISOString().slice(0, 10)}.json`, data);
-    setMessage("Export prepared.");
+    downloadJson(`pajero-maintenance-backup-${new Date().toISOString().slice(0, 10)}.json`, data);
+    setMessage("Backup export prepared.");
   }
 
   function handleOdometerExport() {
@@ -118,84 +110,39 @@ export function Settings({ profile, odometerReadings, onSaveProfile, onImportCom
       <section className="section-block detail-card">
         <h2>Vehicle details</h2>
         <dl className="detail-grid">
-          <div className="detail-row">
-            <dt>Vehicle</dt>
-            <dd>Mitsubishi Pajero III / Montero / Shogun Gen 3</dd>
-          </div>
-          <div className="detail-row">
-            <dt>Year</dt>
-            <dd>2001</dd>
-          </div>
-          <div className="detail-row">
-            <dt>Model code</dt>
-            <dd>{profile.modelCode}</dd>
-          </div>
-          <div className="detail-row">
-            <dt>Engine</dt>
-            <dd>{profile.engine}</dd>
-          </div>
-          <div className="detail-row">
-            <dt>Transmission</dt>
-            <dd>automatic {profile.transmission.replace(/^automatic\s+/i, "").replace(/\s+automatic$/i, "")}</dd>
-          </div>
-          <div className="detail-row">
-            <dt>VIN</dt>
-            <dd>{profile.vin}</dd>
-          </div>
+          <Detail label="Vehicle" value="Mitsubishi Pajero III" />
+          <Detail label="Market name" value="Pajero / Montero / Shogun" />
+          <Detail label="Generation" value="Gen 3" />
+          <Detail label="Year" value="2001" />
+          <Detail label="Body" value="5-door long wheelbase" />
+          <Detail label="Model code" value={profile.modelCode} />
+          <Detail label="Engine" value={profile.engine} />
+          <Detail label="Fuel" value="Diesel" />
+          <Detail label="Transmission" value="Automatic V5A51" />
+          <Detail label="Drive" value="4WD / Super Select" />
+          <Detail label="Power" value="121 kW" />
+          <Detail label="VIN" value={profile.vin} />
+          <Detail label="Purchase date" value={formatDate(profile.purchaseDate)} />
+          <Detail label="Purchase odometer" value={formatKm(profile.purchaseOdometerKm)} />
+          <Detail label="Rear differential service fill" value="1.6 L verified on this vehicle" />
+          <Detail label="Rear wiper blade" value="400 mm verified on this vehicle" />
+          <Detail label="Battery setup" value="likely 2×95 Ah" />
         </dl>
       </section>
 
       <section className="section-block detail-card">
-        <h2>Purchase baseline</h2>
+        <h2>Current odometer</h2>
         <dl className="detail-grid">
-          <div className="detail-row">
-            <dt>Purchased</dt>
-            <dd>{formatDate(profile.purchaseDate)}</dd>
-          </div>
-          <div className="detail-row">
-            <dt>Purchase odometer</dt>
-            <dd>{formatKm(profile.purchaseOdometerKm)}</dd>
-          </div>
-          <div className="detail-row">
-            <dt>Current odometer</dt>
-            <dd>{formatKm(profile.currentOdometerKm)}</dd>
-          </div>
+          <Detail label="Odometer" value={formatKm(profile.currentOdometerKm)} />
+          <Detail label="Purchased" value={formatDate(profile.purchaseDate)} />
+          <Detail label="Purchase odometer" value={formatKm(profile.purchaseOdometerKm)} />
         </dl>
-      </section>
-
-      <section className="section-block detail-card">
-        <h2>Maintenance settings</h2>
-        <form className="form-stack" onSubmit={saveSettings}>
-          <label className="toggle-row">
-            <span>
-              <strong>Unknown history mode</strong>
-              <small>Flags baseline items until they get a service record.</small>
-            </span>
-            <input
-              type="checkbox"
-              checked={unknownHistoryMode}
-              onChange={(event) => setUnknownHistoryMode(event.target.checked)}
-            />
-          </label>
-
-          <p className="settings-note">
-            Offline web apps cannot schedule reliable monthly iPhone notifications while closed. This app shows odometer
-            reminders when opened.
-          </p>
-
-          <button className="primary-button" type="submit">
-            Save settings
-          </button>
-        </form>
       </section>
 
       <section className="section-block detail-card">
         <h2>App update</h2>
         <dl className="detail-grid">
-          <div className="detail-row">
-            <dt>App version</dt>
-            <dd>{APP_VERSION}</dd>
-          </div>
+          <Detail label="App version" value={APP_VERSION} />
         </dl>
         <button
           className="secondary-button full-width-button"
@@ -238,22 +185,29 @@ export function Settings({ profile, odometerReadings, onSaveProfile, onImportCom
       </section>
 
       <section className="section-block detail-card">
-        <h2>Local data</h2>
+        <h2>Data backup</h2>
+        <p className="settings-note">
+          Your service history is stored locally on this device. Export a backup before clearing Safari data or reinstalling the app.
+        </p>
         <div className="button-grid">
           <button className="secondary-button" type="button" onClick={handleExport}>
             <Download aria-hidden="true" size={20} />
-            Export JSON
+            Export full backup JSON
           </button>
           <label className="secondary-button file-button">
             <Upload aria-hidden="true" size={20} />
-            Import JSON
+            Import full backup JSON
             <input accept="application/json" type="file" onChange={handleImport} />
           </label>
-          <button className="danger-button" type="button" onClick={handleReset}>
-            <RotateCcw aria-hidden="true" size={20} />
-            Reset local data
-          </button>
         </div>
+      </section>
+
+      <section className="section-block detail-card">
+        <h2>Reset local data</h2>
+        <button className="danger-button full-width-button" type="button" onClick={handleReset}>
+          <RotateCcw aria-hidden="true" size={20} />
+          Reset local data
+        </button>
       </section>
     </main>
   );
